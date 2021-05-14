@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.625, 18.125" name="QS">
+  <DataContextMoniker Name="/QSDataContext" />
+  <nestedChildShapes>
+    <classShape Id="bb56c6f1-eed9-4f6b-b37e-8d52d9925e55" absoluteBounds="6.75, 6.5, 2, 2.2465844726562496">
+      <DataClassMoniker Name="/QSDataContext/QS_StandardType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e3ee1851-af85-4fa0-9e79-fed37ae5e55b" absoluteBounds="6.765, 6.96, 1.9700000000000002, 1.68658447265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="907389ba-a031-4033-8d4e-762816b04da6" absoluteBounds="6.25, 1, 2, 3.3970157877604166">
+      <DataClassMoniker Name="/QSDataContext/QS_DocIssue" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9034c82b-8351-4efe-b740-4e062657e3d2" absoluteBounds="6.265, 1.46, 1.9700000000000002, 2.8370157877604165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="22b3783f-7165-44d8-8739-f8a67a197afb" absoluteBounds="0.75, 1.625, 2, 2.2465844726562505">
+      <DataClassMoniker Name="/QSDataContext/QS_DocType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9f5df4bb-20c5-4134-ac30-462567698ca6" absoluteBounds="0.765, 2.085, 1.9700000000000002, 1.68658447265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6c5fc610-d382-4c02-b0cd-9db8160b8ce0" absoluteBounds="3.5, 1.375, 2, 2.5752791341145826">
+      <DataClassMoniker Name="/QSDataContext/QS_Document" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dcaa9fb7-dba3-4970-b628-d2a1be62536e" absoluteBounds="3.515, 1.835, 1.9700000000000002, 2.015279134114583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="31557cd7-25b8-4a5f-9df9-766d3bd888b4" absoluteBounds="8.75, 0.75, 2, 1.2605004882812503">
+      <DataClassMoniker Name="/QSDataContext/QS_Option" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0261103e-e324-47ee-98b1-83ff865ef368" absoluteBounds="8.765, 1.21, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5bffdd06-f741-4808-8880-206e82871282" absoluteBounds="9.5, 6, 2, 3.2326684570312514">
+      <DataClassMoniker Name="/QSDataContext/QS_Standard" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0d099db8-603e-4851-a3f3-87c75d27b9ca" absoluteBounds="9.515, 6.46, 1.9700000000000002, 2.67266845703125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.5 : 2.66263956705729); (6.25 : 2.66263956705729)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/QSDataContext/QS_Document/QS_Document_QS_DocIssue" />
+      <nodes>
+        <classShapeMoniker Id="6c5fc610-d382-4c02-b0cd-9db8160b8ce0" />
+        <classShapeMoniker Id="907389ba-a031-4033-8d4e-762816b04da6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 2.74829223632813); (3.5 : 2.74829223632813)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/QSDataContext/QS_DocType/QS_DocType_QS_Document" />
+      <nodes>
+        <classShapeMoniker Id="22b3783f-7165-44d8-8739-f8a67a197afb" />
+        <classShapeMoniker Id="6c5fc610-d382-4c02-b0cd-9db8160b8ce0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.75 : 7.62329223632812); (9.5 : 7.62329223632812)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/QSDataContext/QS_StandardType/QS_StandardType_QS_Standard" />
+      <nodes>
+        <classShapeMoniker Id="bb56c6f1-eed9-4f6b-b37e-8d52d9925e55" />
+        <classShapeMoniker Id="5bffdd06-f741-4808-8880-206e82871282" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="64f6d07d-5835-4284-a096-87911dc5cb31" absoluteBounds="6.375, 10.75, 2, 2.5752791341145844">
+      <DataClassMoniker Name="/QSDataContext/DanhmucCVden" />
+      <nestedChildShapes>
+        <elementListCompartment Id="262208a5-373f-4fdf-84e1-ff04d532041a" absoluteBounds="6.39, 11.21, 1.9700000000000002, 2.015279134114583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1fc1c5a1-7181-4789-bbba-39bdf61b3baa" absoluteBounds="9.375, 10.75, 2, 2.4109318033854166">
+      <DataClassMoniker Name="/QSDataContext/DanhmucTieuchuan" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c8e720c5-71e9-49ff-b889-0a63398424a6" absoluteBounds="9.39, 11.21, 1.9700000000000002, 1.8509318033854165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fcc45b53-a38c-46ef-800e-38f43ec9c3f4" absoluteBounds="11.375, 0.75, 2, 3.7257104492187492">
+      <DataClassMoniker Name="/QSDataContext/DanhmucCVdi" />
+      <nestedChildShapes>
+        <elementListCompartment Id="132adb98-a504-4a10-8d36-2776a0a13a55" absoluteBounds="11.39, 1.21, 1.9700000000000002, 3.16571044921875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0cba7463-b904-4de0-a24c-5be4096770cc" absoluteBounds="12.375, 5.75, 2, 3.0683211263020818">
+      <DataClassMoniker Name="/QSDataContext/Danhmucgoc" />
+      <nestedChildShapes>
+        <elementListCompartment Id="69801853-adf0-438e-aa04-2a9f8b4c9d4e" absoluteBounds="12.39, 6.21, 1.9700000000000002, 2.508321126302083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7e81fbaf-9d41-4d8d-81f6-6b933ccb08a7" absoluteBounds="12.375, 9.75, 2, 3.0683211263020809">
+      <DataClassMoniker Name="/QSDataContext/DanhmucgocInvalid" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d773cc21-27ca-41bb-9139-10745eae5101" absoluteBounds="12.39, 10.21, 1.9700000000000002, 2.508321126302083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0287b9e9-0da2-4127-a71a-7aacea37cd83" absoluteBounds="12.375, 13.75, 2, 3.8900577799479166">
+      <DataClassMoniker Name="/QSDataContext/DanhmucgocValid" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a40b8376-5cc1-4c6e-9463-36b352ac68fb" absoluteBounds="12.39, 14.21, 1.9700000000000002, 3.3300577799479165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="309c34b1-524b-497d-80e1-2d5e7be10def" absoluteBounds="3.25, 13.875, 2, 3.3970157877604166">
+      <DataClassMoniker Name="/QSDataContext/QS_DocOut" />
+      <nestedChildShapes>
+        <elementListCompartment Id="947f08a6-c7a5-40e6-b07e-c6183bd7afb4" absoluteBounds="3.265, 14.335, 1.9700000000000002, 2.8370157877604165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e80ee5c8-d2ea-4950-bb2b-e776c4694e5f" absoluteBounds="6.25, 13.875, 2, 3.3970157877604166">
+      <DataClassMoniker Name="/QSDataContext/QS_DocIn" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ec473c95-0b45-45d6-a9ce-aafb8a210414" absoluteBounds="6.265, 14.335, 1.9700000000000002, 2.8370157877604165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c7fd8767-00c1-42f9-b48b-b2a8ec163956" absoluteBounds="0.5, 11.5, 2, 2.2465844726562505">
+      <DataClassMoniker Name="/QSDataContext/QS_DocCategory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3f55188c-1c59-4576-a79d-d2fb9e91eb82" absoluteBounds="0.515, 11.96, 1.9700000000000002, 1.68658447265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2aeccb0d-8f87-426f-bf0c-5dd7bf05e15c" absoluteBounds="0.5, 15, 2, 1.2605004882812523">
+      <DataClassMoniker Name="/QSDataContext/QS_Office" />
+      <nestedChildShapes>
+        <elementListCompartment Id="18ee2776-d16f-4e42-89ae-46eafde644a9" absoluteBounds="0.515, 15.46, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 12.6232922363281); (4.25 : 12.6232922363281); (4.25 : 13.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/QSDataContext/QS_DocCategory/QS_DocCategory_QS_DocOut" />
+      <nodes>
+        <classShapeMoniker Id="c7fd8767-00c1-42f9-b48b-b2a8ec163956" />
+        <classShapeMoniker Id="309c34b1-524b-497d-80e1-2d5e7be10def" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.5 : 13.5671818033854); (4.16666666666667 : 13.5671818033854 : JumpStart); (4.33333333333333 : 13.5671818033854 : JumpEnd); (6.28125 : 13.5671818033854); (6.28125 : 13.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/QSDataContext/QS_DocCategory/QS_DocCategory_QS_DocIn" />
+      <nodes>
+        <classShapeMoniker Id="c7fd8767-00c1-42f9-b48b-b2a8ec163956" />
+        <classShapeMoniker Id="e80ee5c8-d2ea-4950-bb2b-e776c4694e5f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.5 : 15.6302502441406); (3.25 : 15.6302502441406)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/QSDataContext/QS_Office/QS_Office_QS_DocOut" />
+      <nodes>
+        <classShapeMoniker Id="2aeccb0d-8f87-426f-bf0c-5dd7bf05e15c" />
+        <classShapeMoniker Id="309c34b1-524b-497d-80e1-2d5e7be10def" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.5 : 16.259529872521); (2.875 : 16.634529872521); (2.875 : 17.6470157877604); (5.875 : 17.6470157877604); (6.25 : 17.2720157877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/QSDataContext/QS_Office/QS_Office_QS_DocIn" />
+      <nodes>
+        <classShapeMoniker Id="2aeccb0d-8f87-426f-bf0c-5dd7bf05e15c" />
+        <classShapeMoniker Id="e80ee5c8-d2ea-4950-bb2b-e776c4694e5f" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

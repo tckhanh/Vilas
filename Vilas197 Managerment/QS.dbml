@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbvilas197" Class="QSDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=VCC2-SERVER1\DB_VILAS197;Initial Catalog=dbvilas197;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="dbvilas197ConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.QS_StandardTypes" Member="QS_StandardTypes">
+    <Type Name="QS_StandardType">
+      <Column Name="StdTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StdTypeCode" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="StdTypeName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CreateStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ModifyStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="QS_StandardType_QS_Standard" Member="QS_Standards" ThisKey="StdTypeID" OtherKey="StdTypeID" Type="QS_Standard" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QS_DocIssues" Member="QS_DocIssues">
+    <Type Name="QS_DocIssue">
+      <Column Name="IssueID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DocID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IssueNo" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IssueDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DecisionNo" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="DecisionDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="NotesOfUpdating" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="FileName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="URL" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ExpireDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreateStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ModifyStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="QS_Document_QS_DocIssue" Member="QS_Document" ThisKey="DocID" OtherKey="DocID" Type="QS_Document" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QS_DocTypes" Member="QS_DocTypes">
+    <Type Name="QS_DocType">
+      <Column Name="DocTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DocTypeCode" Type="System.String" DbType="NVarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="DocTypeName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CreateStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ModifyStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="QS_DocType_QS_Document" Member="QS_Documents" ThisKey="DocTypeID" OtherKey="DocTypeID" Type="QS_Document" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QS_Documents" Member="QS_Documents">
+    <Type Name="QS_Document">
+      <Column Name="DocID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DocCode" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="DocTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Abstract" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CreateStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ModifyStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="QS_Document_QS_DocIssue" Member="QS_DocIssues" ThisKey="DocID" OtherKey="DocID" Type="QS_DocIssue" />
+      <Association Name="QS_DocType_QS_Document" Member="QS_DocType" ThisKey="DocTypeID" OtherKey="DocTypeID" Type="QS_DocType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QS_Options" Member="QS_Options">
+    <Type Name="QS_Option">
+      <Column Name="Year" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DocNoIn" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DocNoOut" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QS_Standards" Member="QS_Standards">
+    <Type Name="QS_Standard">
+      <Column Name="StdID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StdCode" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="StdTitle" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="StdTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Abstract" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="FileName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="URL" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="IssueDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ValidDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CreateStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ModifyStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="QS_StandardType_QS_Standard" Member="QS_StandardType" ThisKey="StdTypeID" OtherKey="StdTypeID" Type="QS_StandardType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DanhmucCVden" Member="DanhmucCVdens">
+    <Type Name="DanhmucCVden">
+      <Column Name="SeriNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="InDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DocCatName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="DocNo" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="DocDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="About" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DocYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FileName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="URL" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DocCatID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Invalid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DanhmucTieuchuan" Member="DanhmucTieuchuans">
+    <Type Name="DanhmucTieuchuan">
+      <Column Name="StdTypeName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="StdTypeCode" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="StdCode" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="StdTitle" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Abstract" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="FileName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="URL" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ValidDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DanhmucCVdi" Member="DanhmucCVdis">
+    <Type Name="DanhmucCVdi">
+      <Column Name="DocID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DocCatID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SeriNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DocNo" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="DocDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="About" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="OutDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="FileName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="URL" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="CreateStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ModifyStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DocCatName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="DocCatCode" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="DocYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Danhmucgoc" Member="Danhmucgocs">
+    <Type Name="Danhmucgoc">
+      <Column Name="IssueID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IssueNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IssueDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DecisionNo" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="DecisionDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="FileName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="URL" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="DocCode" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="DocTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DocTypeName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="NotesOfUpdating" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DocID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DanhmucgocInvalid" Member="DanhmucgocInvalids">
+    <Type Name="DanhmucgocInvalid">
+      <Column Name="IssueID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IssueNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IssueDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DecisionNo" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="DecisionDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="FileName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="URL" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="DocCode" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="DocTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DocTypeName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="NotesOfUpdating" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DocID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DanhmucgocValid" Member="DanhmucgocValids">
+    <Type Name="DanhmucgocValid">
+      <Column Name="IssueID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DocID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IssueNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IssueDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DecisionNo" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="DecisionDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="NotesOfUpdating" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="FileName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="URL" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ExpireDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreateStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ModifyStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DocTypeName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DocCode" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QS_DocOuts" Member="QS_DocOuts">
+    <Type Name="QS_DocOut">
+      <Column Name="DocID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DocCatID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SeriNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DocNo" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="DocDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="OfficeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="About" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="OutDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="FileName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="URL" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="CreateStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ModifyStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="QS_DocCategory_QS_DocOut" Member="QS_DocCategory" ThisKey="DocCatID" OtherKey="DocCatID" Type="QS_DocCategory" IsForeignKey="true" />
+      <Association Name="QS_Office_QS_DocOut" Member="QS_Office" ThisKey="OfficeID" OtherKey="OfficeID" Type="QS_Office" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QS_DocIns" Member="QS_DocIns">
+    <Type Name="QS_DocIn">
+      <Column Name="DocID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DocCatID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SeriNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DocNo" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="DocDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="OfficeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="About" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="InDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="FileName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="URL" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="CreateStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ModifyStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="QS_DocCategory_QS_DocIn" Member="QS_DocCategory" ThisKey="DocCatID" OtherKey="DocCatID" Type="QS_DocCategory" IsForeignKey="true" />
+      <Association Name="QS_Office_QS_DocIn" Member="QS_Office" ThisKey="OfficeID" OtherKey="OfficeID" Type="QS_Office" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QS_DocCategories" Member="QS_DocCategories">
+    <Type Name="QS_DocCategory">
+      <Column Name="DocCatID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DocCatCode" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="DocCatName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CreateStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ModifyStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="QS_DocCategory_QS_DocOut" Member="QS_DocOuts" ThisKey="DocCatID" OtherKey="DocCatID" Type="QS_DocOut" />
+      <Association Name="QS_DocCategory_QS_DocIn" Member="QS_DocIns" ThisKey="DocCatID" OtherKey="DocCatID" Type="QS_DocIn" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QS_Offices" Member="QS_Offices">
+    <Type Name="QS_Office">
+      <Column Name="OfficeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OfficeCode" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="OfficeName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="QS_Office_QS_DocOut" Member="QS_DocOuts" ThisKey="OfficeID" OtherKey="OfficeID" Type="QS_DocOut" />
+      <Association Name="QS_Office_QS_DocIn" Member="QS_DocIns" ThisKey="OfficeID" OtherKey="OfficeID" Type="QS_DocIn" />
+    </Type>
+  </Table>
+</Database>

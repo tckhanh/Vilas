@@ -1,0 +1,484 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbvilas197" Class="LabdataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=ANHTUAN-PC;Initial Catalog=dbvilas197;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="db_mang" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.AccHoldStatus" Member="AccHoldStatus">
+    <Type Name="AccHoldStatus">
+      <Column Name="AccHoldID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AccHoldName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="AccHoldStatus_TestAccessory" Member="TestAccessories" ThisKey="AccHoldID" OtherKey="Hold" Type="TestAccessory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TestSystemSource" Member="TestSystemSources">
+    <Type Name="TestSystemSource">
+      <Column Name="SourceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SourceInfo" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="TestSystemSource_TestSystem" Member="TestSystems" ThisKey="SourceID" OtherKey="SourceID" Type="TestSystem" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AccType" Member="AccTypes">
+    <Type Name="AccType">
+      <Column Name="AccTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AccTypeName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="AccType_TestAccessory" Member="TestAccessories" ThisKey="AccTypeID" OtherKey="AccTypeID" Type="TestAccessory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Assignment" Member="Assignments">
+    <Type Name="Assignment">
+      <Column Name="AssignmentID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AssignStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="TestStaffID1" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="TestStaffID2" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="AssignDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="AssignNote" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ReAssign" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Assignment_TestReport" Member="TestReport" ThisKey="AssignmentID" OtherKey="AssignmentID" Type="TestReport" Cardinality="One" />
+      <Association Name="Request_Assignment" Member="Request" ThisKey="AssignmentID" OtherKey="RequestID" Type="Request" IsForeignKey="true" />
+      <Association Name="Staff_Assignment" Member="Staff" ThisKey="AssignStaffID" OtherKey="StaffID" Type="Staff" IsForeignKey="true" />
+      <Association Name="Staff_Assignment1" Member="Staff1" ThisKey="TestStaffID1" OtherKey="StaffID" Type="Staff" IsForeignKey="true" />
+      <Association Name="Staff_Assignment2" Member="Staff2" ThisKey="TestStaffID2" OtherKey="StaffID" Type="Staff" IsForeignKey="true" />
+      <Association Name="Staff_Assignment3" Member="Staff3" ThisKey="TestStaffID1" OtherKey="StaffID" Type="Staff" IsForeignKey="true" />
+      <Association Name="Staff_Assignment4" Member="Staff4" ThisKey="TestStaffID2" OtherKey="StaffID" Type="Staff" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Authorize" Member="Authorizes">
+    <Type Name="Authorize">
+      <Column Name="AuthorizeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StaffID" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BeginDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Role_Authorize" Member="Role" ThisKey="RoleID" OtherKey="RoleID" Type="Role" IsForeignKey="true" />
+      <Association Name="Staff_Authorize" Member="Staff" ThisKey="StaffID" OtherKey="StaffID" Type="Staff" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Calibration" Member="Calibrations">
+    <Type Name="Calibration">
+      <Column Name="CalibID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TestSysID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CalibNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CalibFrom" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CalibDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EndValidDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="TestSystem_Calibration" Member="TestSystem" ThisKey="TestSysID" OtherKey="TestSysID" Type="TestSystem" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Company" Member="Companies">
+    <Type Name="Company">
+      <Column Name="CompanyID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CompanyName" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="FastCompanyName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Address" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ProvinceID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PhoneNo" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FaxNo" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxCode" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Invalid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Contract" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Company_Contact" Member="Contacts" ThisKey="CompanyID" OtherKey="CompanyID" Type="Contact" />
+      <Association Name="Company_Request" Member="Requests" ThisKey="CompanyID" OtherKey="CompanyID" Type="Request" />
+      <Association Name="Company_Request1" Member="Requests1" ThisKey="CompanyID" OtherKey="CompanyID" Type="Request" />
+      <Association Name="Province_Company" Member="Province" ThisKey="ProvinceID" OtherKey="ProvinceID" Type="Province" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Contact" Member="Contacts">
+    <Type Name="Contact">
+      <Column Name="ContactID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CompanyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="LastName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FullName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ContactPhone" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Invalid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Contact_Request" Member="Requests" ThisKey="ContactID" OtherKey="ContactID" Type="Request" />
+      <Association Name="Company_Contact" Member="Company" ThisKey="CompanyID" OtherKey="CompanyID" Type="Company" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Country" Member="Countries">
+    <Type Name="Country">
+      <Column Name="CountryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CountryName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Country_Request" Member="Requests" ThisKey="CountryID" OtherKey="MadeInID" Type="Request" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EffectToSys" Member="EffectToSies">
+    <Type Name="EffectToSy">
+      <Column Name="EffectID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EffectName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="EffectToSy_Incident" Member="Incidents" ThisKey="EffectID" OtherKey="EffectToSysID" Type="Incident" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Environment" Member="Environments">
+    <Type Name="Environment">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="tMor" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="hMor" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="tAft" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="hAft" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="StaffMor" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="StaffAft" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EquipmentType" Member="EquipmentTypes">
+    <Type Name="EquipmentType">
+      <Column Name="EquTypeID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="GroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EquTypeName" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="EquTypeDisplayName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="BriefName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Standards" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="TestMethod" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Price" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="PriceInText" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Info" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="InitDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="EquipmentType_Request" Member="Requests" ThisKey="EquTypeID" OtherKey="EquTypeID" Type="Request" />
+      <Association Name="EquipmentType_Skill" Member="Skills" ThisKey="EquTypeID" OtherKey="EquTypeID" Type="Skill" />
+      <Association Name="GroupEquipment_EquipmentType" Member="GroupEquipment" ThisKey="GroupID" OtherKey="GroupEquID" Type="GroupEquipment" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GroupEquipment" Member="GroupEquipments">
+    <Type Name="GroupEquipment">
+      <Column Name="GroupEquID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GroupEquName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="GroupEquipment_EquipmentType" Member="EquipmentTypes" ThisKey="GroupEquID" OtherKey="GroupID" Type="EquipmentType" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Handover" Member="Handovers">
+    <Type Name="Handover">
+      <Column Name="HandoverID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="HandoverNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="HandoverDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="HandoverReceiveEx" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="HandoverReceiveRe" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ReceiveStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="CompanyName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Address" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Fax" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PerName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Position" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PerID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PerPhoneNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="HandoverStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HandoverStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Handover_HandoverAcc" Member="HandoverAccs" ThisKey="HandoverID" OtherKey="HandoverID" Type="HandoverAcc" />
+      <Association Name="HandoverStatus_Handover" Member="HandoverStatus" ThisKey="HandoverStatusID" OtherKey="HandStatusID" Type="HandoverStatus" IsForeignKey="true" />
+      <Association Name="Staff_Handover" Member="Staff" ThisKey="ReceiveStaffID" OtherKey="StaffID" Type="Staff" IsForeignKey="true" />
+      <Association Name="Staff_Handover1" Member="Staff1" ThisKey="HandoverStaffID" OtherKey="StaffID" Type="Staff" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HandoverAcc" Member="HandoverAccs">
+    <Type Name="HandoverAcc">
+      <Column Name="HandAccID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="HandoverID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AccID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Handover_HandoverAcc" Member="Handover" ThisKey="HandoverID" OtherKey="HandoverID" Type="Handover" IsForeignKey="true" />
+      <Association Name="TestAccessory_HandoverAcc" Member="TestAccessory" ThisKey="AccID" OtherKey="AccID" Type="TestAccessory" IsForeignKey="true" />
+      <Association Name="TestSysStatus_HandoverAcc" Member="TestSysStatus" ThisKey="Status" OtherKey="TestSysStatusID" Type="TestSysStatus" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HandoverStatus" Member="HandoverStatus">
+    <Type Name="HandoverStatus">
+      <Column Name="HandStatusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="HandStatusName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="HandoverStatus_Handover" Member="Handovers" ThisKey="HandStatusID" OtherKey="HandoverStatusID" Type="Handover" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Incident" Member="Incidents">
+    <Type Name="Incident">
+      <Column Name="IncidentID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AccID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IncidentName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Detail" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Solve" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EffectToSysID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SolveDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="IncidentDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="InitDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="EffectToSy_Incident" Member="EffectToSy" ThisKey="EffectToSysID" OtherKey="EffectID" Type="EffectToSy" IsForeignKey="true" />
+      <Association Name="IncidentStatus_Incident" Member="IncidentStatus" ThisKey="StatusID" OtherKey="IncidentStatusID" Type="IncidentStatus" IsForeignKey="true" />
+      <Association Name="TestAccessory_Incident" Member="TestAccessory" ThisKey="AccID" OtherKey="AccID" Type="TestAccessory" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.IncidentStatus" Member="IncidentStatus">
+    <Type Name="IncidentStatus">
+      <Column Name="IncidentStatusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IncidentStatusName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="IncidentStatus_Incident" Member="Incidents" ThisKey="IncidentStatusID" OtherKey="StatusID" Type="Incident" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Number" Member="Numbers">
+    <Type Name="Number">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RequestNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="BillNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TestNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Year" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="YearFull" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TestSysNum" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TestAccNum" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="HandoverNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OrderSt" Member="OrderSts">
+    <Type Name="OrderSt">
+      <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="StID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Month" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OrderStID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OrderDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="OrderStatus_OrderSt" Member="OrderStatus" ThisKey="OrderStID" OtherKey="OrderStID" Type="OrderStatus" IsForeignKey="true" />
+      <Association Name="Staff_OrderSt" Member="Staff" ThisKey="StaffID" OtherKey="StaffID" Type="Staff" IsForeignKey="true" />
+      <Association Name="Stationery_OrderSt" Member="Stationery" ThisKey="StID" OtherKey="StID" Type="Stationery" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OrderStatus" Member="OrderStatus">
+    <Type Name="OrderStatus">
+      <Column Name="OrderStID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrderStName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="OrderStatus_OrderSt" Member="OrderSts" ThisKey="OrderStID" OtherKey="OrderStID" Type="OrderSt" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Province" Member="Provinces">
+    <Type Name="Province">
+      <Column Name="ProvinceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Province" Member="Province1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Province_Company" Member="Companies" ThisKey="ProvinceID" OtherKey="ProvinceID" Type="Company" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RedBill" Member="RedBills">
+    <Type Name="RedBill">
+      <Column Name="RedBillID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RedBillNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="RedBillDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CompanyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PriceNonTax" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Tax" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="PriceIncludeTax" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="PriceInText" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Finish" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="RedBill_TestReport" Member="TestReports" ThisKey="RedBillID" OtherKey="RedBillID" Type="TestReport" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Request" Member="Requests">
+    <Type Name="Request">
+      <Column Name="RequestID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RequestNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="BillNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="BillDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CompanyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ContactID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EquTypeID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="EquTypeName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Model" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Manufacturer" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="MadeInID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Serial_Imei" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Standards" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TestMethod" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Accessories" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ReceiveDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ReceiveStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="AppointmentDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ReturnStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ReturnDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="HoldEquip" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ConfirmDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="InternalNote" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StaffIDNonIssue" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="NonIssueDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="StaffIDApprove" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ApproveNonIssueDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Request_Assignment" Member="Assignment" ThisKey="RequestID" OtherKey="AssignmentID" Type="Assignment" Cardinality="One" />
+      <Association Name="Company_Request" Member="Company" ThisKey="CompanyID" OtherKey="CompanyID" Type="Company" IsForeignKey="true" />
+      <Association Name="Company_Request1" Member="Company1" ThisKey="CompanyID" OtherKey="CompanyID" Type="Company" IsForeignKey="true" />
+      <Association Name="Contact_Request" Member="Contact" ThisKey="ContactID" OtherKey="ContactID" Type="Contact" IsForeignKey="true" />
+      <Association Name="Country_Request" Member="Country" ThisKey="MadeInID" OtherKey="CountryID" Type="Country" IsForeignKey="true" />
+      <Association Name="EquipmentType_Request" Member="EquipmentType" ThisKey="EquTypeID" OtherKey="EquTypeID" Type="EquipmentType" IsForeignKey="true" />
+      <Association Name="RequestStatus_Request" Member="RequestStatus" ThisKey="StatusID" OtherKey="StatusID" Type="RequestStatus" IsForeignKey="true" />
+      <Association Name="Staff_Request" Member="Staff" ThisKey="ReceiveStaffID" OtherKey="StaffID" Type="Staff" IsForeignKey="true" />
+      <Association Name="Staff_Request1" Member="Staff1" ThisKey="ReceiveStaffID" OtherKey="StaffID" Type="Staff" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RequestStatus" Member="RequestStatus">
+    <Type Name="RequestStatus">
+      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StatusName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="RequestStatus_Request" Member="Requests" ThisKey="StatusID" OtherKey="StatusID" Type="Request" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Role" Member="Roles">
+    <Type Name="Role">
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Role" Member="Role1" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="Role_Authorize" Member="Authorizes" ThisKey="RoleID" OtherKey="RoleID" Type="Authorize" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Skill" Member="Skills">
+    <Type Name="Skill">
+      <Column Name="StaffID" Type="System.String" DbType="NVarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EquTypeID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="BeginDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Invalid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[Level]" Member="Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="EquipmentType_Skill" Member="EquipmentType" ThisKey="EquTypeID" OtherKey="EquTypeID" Type="EquipmentType" IsForeignKey="true" />
+      <Association Name="Staff_Skill" Member="Staff" ThisKey="StaffID" OtherKey="StaffID" Type="Staff" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Staff" Member="Staffs">
+    <Type Name="Staff">
+      <Column Name="StaffID" Type="System.String" DbType="NVarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StaffNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="StaffFistName" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="StaffLastName" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="StaffFullName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PhoneNo" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="HomeAddress" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="HomePhone" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="BeginDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Department" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Position" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="WorkHistory" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TrainHistory" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="StaffImg" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Staff_Assignment" Member="Assignments" ThisKey="StaffID" OtherKey="AssignStaffID" Type="Assignment" />
+      <Association Name="Staff_Assignment1" Member="Assignments1" ThisKey="StaffID" OtherKey="TestStaffID1" Type="Assignment" />
+      <Association Name="Staff_Assignment2" Member="Assignments2" ThisKey="StaffID" OtherKey="TestStaffID2" Type="Assignment" />
+      <Association Name="Staff_Assignment3" Member="Assignments3" ThisKey="StaffID" OtherKey="TestStaffID1" Type="Assignment" />
+      <Association Name="Staff_Assignment4" Member="Assignments4" ThisKey="StaffID" OtherKey="TestStaffID2" Type="Assignment" />
+      <Association Name="Staff_Authorize" Member="Authorizes" ThisKey="StaffID" OtherKey="StaffID" Type="Authorize" />
+      <Association Name="Staff_Handover" Member="Handovers" ThisKey="StaffID" OtherKey="ReceiveStaffID" Type="Handover" />
+      <Association Name="Staff_Handover1" Member="Handovers1" ThisKey="StaffID" OtherKey="HandoverStaffID" Type="Handover" />
+      <Association Name="Staff_OrderSt" Member="OrderSts" ThisKey="StaffID" OtherKey="StaffID" Type="OrderSt" />
+      <Association Name="Staff_Request" Member="Requests" ThisKey="StaffID" OtherKey="ReceiveStaffID" Type="Request" />
+      <Association Name="Staff_Request1" Member="Requests1" ThisKey="StaffID" OtherKey="ReceiveStaffID" Type="Request" />
+      <Association Name="Staff_Skill" Member="Skills" ThisKey="StaffID" OtherKey="StaffID" Type="Skill" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Stationery" Member="Stationeries">
+    <Type Name="Stationery">
+      <Column Name="StID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Price" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Stationery_OrderSt" Member="OrderSts" ThisKey="StID" OtherKey="StID" Type="OrderSt" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TestAccessory" Member="TestAccessories">
+    <Type Name="TestAccessory">
+      <Column Name="AccID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TestSysID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AccNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AccName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Model" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="SN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Manufacturer" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CountryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AccTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MadeYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReceiveDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="History" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Hold" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Body" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MainAcc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Valid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TestAccessory_HandoverAcc" Member="HandoverAccs" ThisKey="AccID" OtherKey="AccID" Type="HandoverAcc" />
+      <Association Name="TestAccessory_Incident" Member="Incidents" ThisKey="AccID" OtherKey="AccID" Type="Incident" />
+      <Association Name="AccHoldStatus_TestAccessory" Member="AccHoldStatus" ThisKey="Hold" OtherKey="AccHoldID" Type="AccHoldStatus" IsForeignKey="true" />
+      <Association Name="AccType_TestAccessory" Member="AccType" ThisKey="AccTypeID" OtherKey="AccTypeID" Type="AccType" IsForeignKey="true" />
+      <Association Name="TestSysStatus_TestAccessory" Member="TestSysStatus" ThisKey="StatusID" OtherKey="TestSysStatusID" Type="TestSysStatus" IsForeignKey="true" />
+      <Association Name="TestSystem_TestAccessory" Member="TestSystem" ThisKey="TestSysID" OtherKey="TestSysID" Type="TestSystem" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TestField" Member="TestFields">
+    <Type Name="TestField">
+      <Column Name="FieldID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FiledInfo" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="TestField_TestSystem" Member="TestSystems" ThisKey="FieldID" OtherKey="FieldID" Type="TestSystem" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TestReport" Member="TestReports">
+    <Type Name="TestReport">
+      <Column Name="AssignmentID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RequestNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TestReportNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TestReportIssueDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TestDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TestDateSession" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Temperature" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Humidity" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TestHistory" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TestReportNoFull" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ReturnRPDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ReturnStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="RedBillID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReturnRBDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="HoldTest" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HoldRedBill" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReturnRBStaffID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Kind" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreateRPStaff" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ApproveStaff" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ApproveDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Assignment_TestReport" Member="Assignment" ThisKey="AssignmentID" OtherKey="AssignmentID" Type="Assignment" IsForeignKey="true" />
+      <Association Name="RedBill_TestReport" Member="RedBill" ThisKey="RedBillID" OtherKey="RedBillID" Type="RedBill" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TestSysStatus" Member="TestSysStatus">
+    <Type Name="TestSysStatus">
+      <Column Name="TestSysStatusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TestSysStatusName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="TestSysStatus_HandoverAcc" Member="HandoverAccs" ThisKey="TestSysStatusID" OtherKey="Status" Type="HandoverAcc" />
+      <Association Name="TestSysStatus_TestAccessory" Member="TestAccessories" ThisKey="TestSysStatusID" OtherKey="StatusID" Type="TestAccessory" />
+      <Association Name="TestSysStatus_TestSystem" Member="TestSystems" ThisKey="TestSysStatusID" OtherKey="StatusID" Type="TestSystem" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TestSystem" Member="TestSystems">
+    <Type Name="TestSystem">
+      <Column Name="TestSysID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TestSysNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TestSysName" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Model" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Manufacturer" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CountryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MadeYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReceiveDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="History" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SourceID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FieldID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TestSpec" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Valid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Register" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TestSystem_Calibration" Member="Calibrations" ThisKey="TestSysID" OtherKey="TestSysID" Type="Calibration" />
+      <Association Name="TestSystem_TestAccessory" Member="TestAccessories" ThisKey="TestSysID" OtherKey="TestSysID" Type="TestAccessory" />
+      <Association Name="TestSysStatus_TestSystem" Member="TestSysStatus" ThisKey="StatusID" OtherKey="TestSysStatusID" Type="TestSysStatus" IsForeignKey="true" />
+      <Association Name="TestField_TestSystem" Member="TestField" ThisKey="FieldID" OtherKey="FieldID" Type="TestField" IsForeignKey="true" />
+      <Association Name="TestSystemSource_TestSystem" Member="TestSystemSource" ThisKey="SourceID" OtherKey="SourceID" Type="TestSystemSource" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

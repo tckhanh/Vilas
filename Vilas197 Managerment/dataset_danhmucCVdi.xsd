@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dataset_danhmucCVdi" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="2" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=VCC2-KHANH;Initial Catalog=dbvilas197;User ID=sa;Password=abc1234567" IsAppSettingsProperty="false" Modifier="Assembly" Name="Connection" ParameterPrefix="@" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="dbvilas197ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="dbvilas197ConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.dbvilas197ConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="db_mang" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="db_mang (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.db_mang.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DanhmucCVdiAdapter" GeneratorDataComponentClassName="DanhmucCVdiAdapter" Name="DanhmucCVdi" UserDataComponentName="DanhmucCVdiAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="db_mang (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT     QS_DocOuts.DocID, QS_DocOuts.DocCatID, QS_DocOuts.SeriNo, QS_DocOuts.DocNo, QS_DocOuts.DocDate, QS_DocOuts.OfficeID, 
+                      QS_DocOuts.About, QS_DocOuts.OutDate, QS_DocOuts.FileName, QS_DocOuts.URL, QS_DocOuts.CreateStaffID, QS_DocOuts.CreateDate, 
+                      QS_DocOuts.ModifyStaffID, QS_DocOuts.ModifyDate, QS_DocOuts.Invalid, QS_DocOuts.Deleted, QS_DocCategories.DocCatName, 
+                      QS_Offices.OfficeName, YEAR(QS_DocOuts.OutDate) AS DocYear, QS_DocCategories.DocCatCode
+FROM         QS_DocOuts INNER JOIN
+                      QS_DocCategories ON QS_DocOuts.DocCatID = QS_DocCategories.DocCatID INNER JOIN
+                      QS_Offices ON QS_DocOuts.OfficeID = QS_Offices.OfficeID
+WHERE     (QS_DocOuts.Invalid = 0) AND (QS_DocOuts.Deleted = 0)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="DocID" DataSetColumn="DocID" />
+              <Mapping SourceColumn="DocCatID" DataSetColumn="DocCatID" />
+              <Mapping SourceColumn="DocCatCode" DataSetColumn="DocCatCode" />
+              <Mapping SourceColumn="DocCatName" DataSetColumn="DocCatName" />
+              <Mapping SourceColumn="SeriNo" DataSetColumn="SeriNo" />
+              <Mapping SourceColumn="DocNo" DataSetColumn="DocNo" />
+              <Mapping SourceColumn="DocDate" DataSetColumn="DocDate" />
+              <Mapping SourceColumn="About" DataSetColumn="About" />
+              <Mapping SourceColumn="OutDate" DataSetColumn="OutDate" />
+              <Mapping SourceColumn="FileName" DataSetColumn="FileName" />
+              <Mapping SourceColumn="URL" DataSetColumn="URL" />
+              <Mapping SourceColumn="CreateStaffID" DataSetColumn="CreateStaffID" />
+              <Mapping SourceColumn="CreateDate" DataSetColumn="CreateDate" />
+              <Mapping SourceColumn="ModifyStaffID" DataSetColumn="ModifyStaffID" />
+              <Mapping SourceColumn="ModifyDate" DataSetColumn="ModifyDate" />
+              <Mapping SourceColumn="Invalid" DataSetColumn="Invalid" />
+              <Mapping SourceColumn="Deleted" DataSetColumn="Deleted" />
+              <Mapping SourceColumn="DocYear" DataSetColumn="DocYear" />
+              <Mapping SourceColumn="OfficeID" DataSetColumn="OfficeID" />
+              <Mapping SourceColumn="OfficeName" DataSetColumn="OfficeName" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dataset_danhmucCVdi" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="dataset_danhmucCVdi" msprop:Generator_UserDSName="dataset_danhmucCVdi">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DanhmucCVdi" msprop:Generator_TableClassName="DanhmucCVdiDataTable" msprop:Generator_TableVarName="tableDanhmucCVdi" msprop:Generator_TablePropName="DanhmucCVdi" msprop:Generator_RowDeletingName="DanhmucCVdiRowDeleting" msprop:Generator_UserTableName="DanhmucCVdi" msprop:Generator_RowChangingName="DanhmucCVdiRowChanging" msprop:Generator_RowEvHandlerName="DanhmucCVdiRowChangeEventHandler" msprop:Generator_RowDeletedName="DanhmucCVdiRowDeleted" msprop:Generator_RowEvArgName="DanhmucCVdiRowChangeEvent" msprop:Generator_RowChangedName="DanhmucCVdiRowChanged" msprop:Generator_RowClassName="DanhmucCVdiRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DocID" msprop:Generator_ColumnVarNameInTable="columnDocID" msprop:Generator_ColumnPropNameInRow="DocID" msprop:Generator_ColumnPropNameInTable="DocIDColumn" msprop:Generator_UserColumnName="DocID" type="xs:int" />
+              <xs:element name="DocCatID" msprop:Generator_ColumnVarNameInTable="columnDocCatID" msprop:Generator_ColumnPropNameInRow="DocCatID" msprop:Generator_ColumnPropNameInTable="DocCatIDColumn" msprop:Generator_UserColumnName="DocCatID" type="xs:int" minOccurs="0" />
+              <xs:element name="DocCatCode" msprop:Generator_ColumnVarNameInTable="columnDocCatCode" msprop:Generator_ColumnPropNameInRow="DocCatCode" msprop:Generator_ColumnPropNameInTable="DocCatCodeColumn" msprop:Generator_UserColumnName="DocCatCode">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocCatName" msprop:Generator_ColumnVarNameInTable="columnDocCatName" msprop:Generator_ColumnPropNameInRow="DocCatName" msprop:Generator_ColumnPropNameInTable="DocCatNameColumn" msprop:Generator_UserColumnName="DocCatName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SeriNo" msprop:Generator_ColumnVarNameInTable="columnSeriNo" msprop:Generator_ColumnPropNameInRow="SeriNo" msprop:Generator_ColumnPropNameInTable="SeriNoColumn" msprop:Generator_UserColumnName="SeriNo" type="xs:int" minOccurs="0" />
+              <xs:element name="DocNo" msprop:Generator_ColumnVarNameInTable="columnDocNo" msprop:Generator_ColumnPropNameInRow="DocNo" msprop:Generator_ColumnPropNameInTable="DocNoColumn" msprop:Generator_UserColumnName="DocNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocDate" msprop:Generator_ColumnVarNameInTable="columnDocDate" msprop:Generator_ColumnPropNameInRow="DocDate" msprop:Generator_ColumnPropNameInTable="DocDateColumn" msprop:Generator_UserColumnName="DocDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="About" msprop:Generator_ColumnVarNameInTable="columnAbout" msprop:Generator_ColumnPropNameInRow="About" msprop:Generator_ColumnPropNameInTable="AboutColumn" msprop:Generator_UserColumnName="About" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OutDate" msprop:Generator_ColumnVarNameInTable="columnOutDate" msprop:Generator_ColumnPropNameInRow="OutDate" msprop:Generator_ColumnPropNameInTable="OutDateColumn" msprop:Generator_UserColumnName="OutDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="FileName" msprop:Generator_ColumnVarNameInTable="columnFileName" msprop:Generator_ColumnPropNameInRow="FileName" msprop:Generator_ColumnPropNameInTable="FileNameColumn" msprop:Generator_UserColumnName="FileName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="URL" msprop:Generator_ColumnVarNameInTable="columnURL" msprop:Generator_ColumnPropNameInRow="URL" msprop:Generator_ColumnPropNameInTable="URLColumn" msprop:Generator_UserColumnName="URL" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CreateStaffID" msprop:Generator_ColumnVarNameInTable="columnCreateStaffID" msprop:Generator_ColumnPropNameInRow="CreateStaffID" msprop:Generator_ColumnPropNameInTable="CreateStaffIDColumn" msprop:Generator_UserColumnName="CreateStaffID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CreateDate" msprop:Generator_ColumnVarNameInTable="columnCreateDate" msprop:Generator_ColumnPropNameInRow="CreateDate" msprop:Generator_ColumnPropNameInTable="CreateDateColumn" msprop:Generator_UserColumnName="CreateDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ModifyStaffID" msprop:Generator_ColumnVarNameInTable="columnModifyStaffID" msprop:Generator_ColumnPropNameInRow="ModifyStaffID" msprop:Generator_ColumnPropNameInTable="ModifyStaffIDColumn" msprop:Generator_UserColumnName="ModifyStaffID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ModifyDate" msprop:Generator_ColumnVarNameInTable="columnModifyDate" msprop:Generator_ColumnPropNameInRow="ModifyDate" msprop:Generator_ColumnPropNameInTable="ModifyDateColumn" msprop:Generator_UserColumnName="ModifyDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Invalid" msprop:Generator_ColumnVarNameInTable="columnInvalid" msprop:Generator_ColumnPropNameInRow="Invalid" msprop:Generator_ColumnPropNameInTable="InvalidColumn" msprop:Generator_UserColumnName="Invalid" type="xs:boolean" minOccurs="0" />
+              <xs:element name="Deleted" msprop:Generator_ColumnVarNameInTable="columnDeleted" msprop:Generator_ColumnPropNameInRow="Deleted" msprop:Generator_ColumnPropNameInTable="DeletedColumn" msprop:Generator_UserColumnName="Deleted" type="xs:boolean" minOccurs="0" />
+              <xs:element name="DocYear" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnDocYear" msprop:Generator_ColumnPropNameInRow="DocYear" msprop:Generator_ColumnPropNameInTable="DocYearColumn" msprop:Generator_UserColumnName="DocYear" type="xs:int" minOccurs="0" />
+              <xs:element name="OfficeID" msprop:Generator_ColumnVarNameInTable="columnOfficeID" msprop:Generator_ColumnPropNameInRow="OfficeID" msprop:Generator_ColumnPropNameInTable="OfficeIDColumn" msprop:Generator_UserColumnName="OfficeID" type="xs:int" minOccurs="0" />
+              <xs:element name="OfficeName" msprop:Generator_ColumnVarNameInTable="columnOfficeName" msprop:Generator_ColumnPropNameInRow="OfficeName" msprop:Generator_ColumnPropNameInTable="OfficeNameColumn" msprop:Generator_UserColumnName="OfficeName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//DanhmucCVdi" />
+      <xs:field xpath="DocID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

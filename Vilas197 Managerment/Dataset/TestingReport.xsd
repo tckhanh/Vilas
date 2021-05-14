@@ -1,0 +1,707 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TestingReport" targetNamespace="http://tempuri.org/TestingReport.xsd" xmlns:mstns="http://tempuri.org/TestingReport.xsd" xmlns="http://tempuri.org/TestingReport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="db_mang" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="db_mang (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.db_mang.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EquipmentTypeTableAdapter" GeneratorDataComponentClassName="EquipmentTypeTableAdapter" Name="EquipmentType" UserDataComponentName="EquipmentTypeTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="db_mang (Web.config)" DbObjectName="dbvilas197.dbo.EquipmentType" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        EquTypeID, EquTypeName,
+                             (SELECT        COUNT(Request.RequestID) AS NumofRequest
+                               FROM            Request INNER JOIN
+                                                         EquipmentType AS EquipmentType1 ON Request.EquTypeID = EquipmentType1.EquTypeID
+                               WHERE        (EquipmentType.EquTypeID = Request.EquTypeID) AND (Request.ReceiveDate &gt;= @BD) AND (Request.ReceiveDate &lt;= @ED) AND 
+                                                         (Request.ContractNo IS NULL OR
+                                                         Request.ContractNo = ' ')
+                               GROUP BY EquipmentType1.EquTypeID) AS NumOfRequest,
+                             (SELECT        COUNT(Request_3.RequestID) AS NumOfRequestNonIssue
+                               FROM            Request AS Request_3 INNER JOIN
+                                                         EquipmentType AS EquipmentType4 ON Request_3.EquTypeID = EquipmentType4.EquTypeID
+                               WHERE        (EquipmentType.EquTypeID = Request_3.EquTypeID) AND (Request_3.StatusID = 6 OR
+                                                         Request_3.StatusID = 7) AND (Request_3.ReceiveDate &gt;= @BD) AND (Request_3.ReceiveDate &lt;= @ED) AND (Request_3.ContractNo IS NULL OR
+                                                         Request_3.ContractNo = ' ')
+                               GROUP BY EquipmentType4.EquTypeID) AS NumOfRequestNonIssue,
+                             (SELECT        COUNT(TestReport.AssignmentID) AS NumOfTestReport
+                               FROM            Request AS Request_2 INNER JOIN
+                                                         EquipmentType AS EquipmentType2 ON Request_2.EquTypeID = EquipmentType2.EquTypeID INNER JOIN
+                                                         Assignment ON Request_2.RequestID = Assignment.AssignmentID INNER JOIN
+                                                         TestReport ON Assignment.AssignmentID = TestReport.AssignmentID
+                               WHERE        (EquipmentType.EquTypeID = Request_2.EquTypeID) AND (TestReport.TestReportIssueDate &gt;= @BD) AND (TestReport.TestReportIssueDate &lt;= @ED) 
+                                                         AND (Request_2.ContractNo IS NULL OR
+                                                         Request_2.ContractNo = ' ')
+                               GROUP BY EquipmentType2.EquTypeID) AS NumOfTestReport,
+                             (SELECT        SUM(EquipmentType3.Price) AS SumPrice
+                               FROM            Request AS Request_1 INNER JOIN
+                                                         EquipmentType AS EquipmentType3 ON Request_1.EquTypeID = EquipmentType3.EquTypeID INNER JOIN
+                                                         Assignment AS Assignment_1 ON Request_1.RequestID = Assignment_1.AssignmentID INNER JOIN
+                                                         TestReport AS TestReport_1 ON Assignment_1.AssignmentID = TestReport_1.AssignmentID
+                               WHERE        (EquipmentType.EquTypeID = Request_1.EquTypeID) AND (TestReport_1.TestReportIssueDate &gt;= @BD) AND 
+                                                         (TestReport_1.TestReportIssueDate &lt;= @ED) AND (Request_1.ContractNo IS NULL OR
+                                                         Request_1.ContractNo = ' ')
+                               GROUP BY EquipmentType3.EquTypeID) AS SumPrice,
+                             (SELECT        COUNT(Request_4.RequestID) AS NumofRequestHasContract
+                               FROM            Request AS Request_4 INNER JOIN
+                                                         EquipmentType AS EquipmentType4 ON Request_4.EquTypeID = EquipmentType4.EquTypeID
+                               WHERE        (EquipmentType.EquTypeID = Request_4.EquTypeID) AND (Request_4.ReceiveDate &gt;= @BD) AND (Request_4.ReceiveDate &lt;= @ED) AND 
+                                                         (Request_4.ContractNo IS NOT NULL) AND (Request_4.ContractNo &lt;&gt; ' ')
+                               GROUP BY EquipmentType4.EquTypeID) AS NumofRequestHasContract,
+                             (SELECT        COUNT(Request_5.RequestID) AS NumOfRequestNonIssueHasContract
+                               FROM            Request AS Request_5 INNER JOIN
+                                                         EquipmentType AS EquipmentType5 ON Request_5.EquTypeID = EquipmentType5.EquTypeID
+                               WHERE        (EquipmentType.EquTypeID = Request_5.EquTypeID) AND (Request_5.StatusID = 6 OR
+                                                         Request_5.StatusID = 7) AND (Request_5.ReceiveDate &gt;= @BD) AND (Request_5.ReceiveDate &lt;= @ED) AND (Request_5.ContractNo IS NOT NULL) 
+                                                         AND (Request_5.ContractNo &lt;&gt; ' ')
+                               GROUP BY EquipmentType5.EquTypeID) AS NumOfRequestNonIssueHasContract,
+                             (SELECT        COUNT(TestReport_2.AssignmentID) AS NumOfTestReportHasContract
+                               FROM            Request AS Request_6 INNER JOIN
+                                                         EquipmentType AS EquipmentType6 ON Request_6.EquTypeID = EquipmentType6.EquTypeID INNER JOIN
+                                                         Assignment AS Assignment_2 ON Request_6.RequestID = Assignment_2.AssignmentID INNER JOIN
+                                                         TestReport AS TestReport_2 ON Assignment_2.AssignmentID = TestReport_2.AssignmentID
+                               WHERE        (EquipmentType.EquTypeID = Request_6.EquTypeID) AND (TestReport_2.TestReportIssueDate &gt;= @BD) AND 
+                                                         (TestReport_2.TestReportIssueDate &lt;= @ED) AND (Request_6.ContractNo IS NOT NULL) AND (Request_6.ContractNo &lt;&gt; ' ')
+                               GROUP BY EquipmentType6.EquTypeID) AS NumOfTestReportHasContract,
+                             (SELECT        SUM(EquipmentType7.Price) AS SumPriceHasContract
+                               FROM            Request AS Request_7 INNER JOIN
+                                                         EquipmentType AS EquipmentType7 ON Request_7.EquTypeID = EquipmentType7.EquTypeID INNER JOIN
+                                                         Assignment AS Assignment_7 ON Request_7.RequestID = Assignment_7.AssignmentID INNER JOIN
+                                                         TestReport AS TestReport_7 ON Assignment_7.AssignmentID = TestReport_7.AssignmentID
+                               WHERE        (EquipmentType.EquTypeID = Request_7.EquTypeID) AND (TestReport_7.TestReportIssueDate &gt;= @BD) AND 
+                                                         (TestReport_7.TestReportIssueDate &lt;= @ED) AND (Request_7.ContractNo IS NOT NULL) AND (Request_7.ContractNo &lt;&gt; ' ')
+                               GROUP BY EquipmentType7.EquTypeID) AS SumPriceHasContract,
+                             (SELECT        SUM(1) AS No
+                               FROM            EquipmentType AS EquipmentType8
+                               WHERE        (EquipmentType.EquTypeID &gt;= EquTypeID)) AS No
+FROM            EquipmentType AS EquipmentType</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="BD" ColumnName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@BD" Precision="0" ProviderType="DateTime" Scale="0" Size="3" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="ED" ColumnName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@ED" Precision="0" ProviderType="DateTime" Scale="0" Size="3" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="EquTypeID" DataSetColumn="EquTypeID" />
+              <Mapping SourceColumn="EquTypeName" DataSetColumn="EquTypeName" />
+              <Mapping SourceColumn="NumOfRequest" DataSetColumn="NumOfRequest" />
+              <Mapping SourceColumn="NumOfRequestNonIssue" DataSetColumn="NumOfRequestNonIssue" />
+              <Mapping SourceColumn="NumOfTestReport" DataSetColumn="NumOfTestReport" />
+              <Mapping SourceColumn="SumPrice" DataSetColumn="SumPrice" />
+              <Mapping SourceColumn="NumofRequestHasContract" DataSetColumn="NumofRequestHasContract" />
+              <Mapping SourceColumn="NumOfRequestNonIssueHasContract" DataSetColumn="NumOfRequestNonIssueHasContract" />
+              <Mapping SourceColumn="NumOfTestReportHasContract" DataSetColumn="NumOfTestReportHasContract" />
+              <Mapping SourceColumn="SumPriceHasContract" DataSetColumn="SumPriceHasContract" />
+              <Mapping SourceColumn="No" DataSetColumn="No" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EquipmentType1TableAdapter" GeneratorDataComponentClassName="EquipmentType1TableAdapter" Name="EquipmentType1" UserDataComponentName="EquipmentType1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="db_mang (Web.config)" DbObjectName="dbvilas197.dbo.EquipmentType" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [EquipmentType] WHERE (([EquTypeID] = @Original_EquTypeID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_EquTypeID" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="EquTypeID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        EquTypeID, EquTypeName,
+                             (SELECT        COUNT(TestReport1.AssignmentID) AS SumTestReportInTime
+                               FROM            Request AS Request1 INNER JOIN
+                                                         Assignment AS Assignment1 ON Request1.RequestID = Assignment1.AssignmentID INNER JOIN
+                                                         TestReport AS TestReport1 ON Assignment1.AssignmentID = TestReport1.AssignmentID INNER JOIN
+                                                         EquipmentType AS EquipmentType1 ON Request1.EquTypeID = EquipmentType1.EquTypeID
+                               WHERE        (DATEDIFF(DAY, TestReport1.TestReportIssueDate, Request1.AppointmentDate) &gt;= 0) AND (EquipmentType.EquTypeID = EquipmentType1.EquTypeID) 
+                                                         AND (TestReport1.TestReportIssueDate &gt;= @BD) AND (TestReport1.TestReportIssueDate &lt;= @ED)
+                               GROUP BY EquipmentType1.EquTypeID) AS SumTestReportInTime,
+                             (SELECT        COUNT(TestReport2.AssignmentID) AS SumTestReportOverTime
+                               FROM            Request AS Request2 INNER JOIN
+                                                         Assignment AS Assignment2 ON Request2.RequestID = Assignment2.AssignmentID INNER JOIN
+                                                         TestReport AS TestReport2 ON Assignment2.AssignmentID = TestReport2.AssignmentID INNER JOIN
+                                                         EquipmentType AS EquipmentType2 ON Request2.EquTypeID = EquipmentType2.EquTypeID
+                               WHERE        (DATEDIFF(DAY, TestReport2.TestReportIssueDate, Request2.AppointmentDate) &lt; 0) AND (EquipmentType.EquTypeID = EquipmentType2.EquTypeID) 
+                                                         AND (TestReport2.TestReportIssueDate &gt;= @BD) AND (TestReport2.TestReportIssueDate &lt;= @ED)
+                               GROUP BY EquipmentType2.EquTypeID) AS SumTestReportOverTime,
+                             (SELECT        COUNT(Request3.RequestID) AS SumRequestInProCessOverTime
+                               FROM            Request AS Request3 INNER JOIN
+                                                         EquipmentType AS EquipmentType3 ON Request3.EquTypeID = EquipmentType3.EquTypeID
+                               WHERE        (DATEDIFF(DAY, GETDATE(), Request3.AppointmentDate) &lt; 0) AND (Request3.StatusID = 1 OR
+                                                         Request3.StatusID = 2 OR
+                                                         Request3.StatusID = 3) AND (EquipmentType.EquTypeID = EquipmentType3.EquTypeID) AND (Request3.ReceiveDate &gt;= @BD) AND 
+                                                         (Request3.ReceiveDate &lt;= @ED)
+                               GROUP BY EquipmentType3.EquTypeID) AS SumRequestInProCessOverTime,
+                             (SELECT        COUNT(Request4.RequestID) AS SumRequestInProCess
+                               FROM            Request AS Request4 INNER JOIN
+                                                         EquipmentType AS EquipmentType4 ON Request4.EquTypeID = EquipmentType4.EquTypeID
+                               WHERE        (Request4.StatusID = 1 OR
+                                                         Request4.StatusID = 2 OR
+                                                         Request4.StatusID = 3) AND (EquipmentType.EquTypeID = EquipmentType4.EquTypeID) AND (Request4.ReceiveDate &gt;= @BD) AND 
+                                                         (Request4.ReceiveDate &lt;= @ED)
+                               GROUP BY EquipmentType4.EquTypeID) AS SumRequestInProCess,
+                             (SELECT        SUM(1) AS No
+                               FROM            EquipmentType AS EquipmentType5
+                               WHERE        (EquipmentType.EquTypeID &gt;= EquTypeID)) AS No
+FROM            EquipmentType</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="BD" ColumnName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@BD" Precision="0" ProviderType="DateTime" Scale="0" Size="3" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="ED" ColumnName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@ED" Precision="0" ProviderType="DateTime" Scale="0" Size="3" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [EquipmentType] SET [EquTypeID] = @EquTypeID, [EquTypeName] = @EquTypeName WHERE (([EquTypeID] = @Original_EquTypeID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@EquTypeID" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="EquTypeID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@EquTypeName" Precision="0" ProviderType="NText" Scale="0" Size="0" SourceColumn="EquTypeName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_EquTypeID" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="EquTypeID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="EquTypeID" DataSetColumn="EquTypeID" />
+              <Mapping SourceColumn="EquTypeName" DataSetColumn="EquTypeName" />
+              <Mapping SourceColumn="SumTestReportInTime" DataSetColumn="SumTestReportInTime" />
+              <Mapping SourceColumn="SumTestReportOverTime" DataSetColumn="SumTestReportOverTime" />
+              <Mapping SourceColumn="SumRequestInProCessOverTime" DataSetColumn="SumRequestInProCessOverTime" />
+              <Mapping SourceColumn="SumRequestInProCess" DataSetColumn="SumRequestInProCess" />
+              <Mapping SourceColumn="No" DataSetColumn="No" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="GroupEquipmentTableAdapter" GeneratorDataComponentClassName="GroupEquipmentTableAdapter" Name="GroupEquipment" UserDataComponentName="GroupEquipmentTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="db_mang (Web.config)" DbObjectName="dbvilas197.dbo.GroupEquipment" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [GroupEquipment] WHERE (([GroupEquID] = @Original_GroupEquID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_GroupEquID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="GroupEquID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [GroupEquipment] ([GroupEquName]) VALUES (@GroupEquName)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@GroupEquName" Precision="0" ProviderType="NText" Scale="0" Size="0" SourceColumn="GroupEquName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT GroupEquName, GroupEquID, (SELECT COUNT(Request1.RequestID) AS NumofRequest FROM Request AS Request1 INNER JOIN EquipmentType AS EquipmentType1 ON Request1.EquTypeID = EquipmentType1.EquTypeID AND Request1.EquTypeID = EquipmentType1.EquTypeID INNER JOIN GroupEquipment AS GroupEquipment1 ON EquipmentType1.GroupID = GroupEquipment1.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType1.GroupID) AND (Request1.ReceiveDate &gt;= @BD) AND (Request1.ReceiveDate &lt;= @ED) AND (Request1.ContractNo IS NULL OR Request1.ContractNo = ' ') GROUP BY GroupEquipment1.GroupEquID) AS NumOfRequest, (SELECT COUNT(Request_2.RequestID) AS NumOfRequestNonIssue FROM Request AS Request_2 INNER JOIN EquipmentType AS EquipmentType2 ON Request_2.EquTypeID = EquipmentType2.EquTypeID AND Request_2.EquTypeID = EquipmentType2.EquTypeID INNER JOIN GroupEquipment AS GroupEquipment_2 ON EquipmentType2.GroupID = GroupEquipment_2.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType2.GroupID) AND (Request_2.StatusID = 6 OR Request_2.StatusID = 7) AND (Request_2.ReceiveDate &gt;= @BD) AND (Request_2.ReceiveDate &lt;= @ED) AND (Request_2.ContractNo IS NULL OR Request_2.ContractNo = ' ') GROUP BY GroupEquipment_2.GroupEquID) AS NumOfRequestNonIssue, (SELECT COUNT(TestReport.AssignmentID) AS NumOfTestReport FROM Request AS Request_3 INNER JOIN EquipmentType AS EquipmentType3 ON Request_3.EquTypeID = EquipmentType3.EquTypeID AND Request_3.EquTypeID = EquipmentType3.EquTypeID INNER JOIN Assignment ON Request_3.RequestID = Assignment.AssignmentID INNER JOIN TestReport ON Assignment.AssignmentID = TestReport.AssignmentID INNER JOIN GroupEquipment AS GroupEquipment_3 ON EquipmentType3.GroupID = GroupEquipment_3.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType3.GroupID) AND (TestReport.TestReportIssueDate &gt;= @BD) AND (TestReport.TestReportIssueDate &lt;= @ED) AND (Request_3.ContractNo IS NULL OR Request_3.ContractNo = ' ') GROUP BY GroupEquipment_3.GroupEquID) AS NumOfTestReport, (SELECT SUM(EquipmentType4.Price) AS SumPrice FROM Request AS Request_4 INNER JOIN EquipmentType AS EquipmentType4 ON Request_4.EquTypeID = EquipmentType4.EquTypeID AND Request_4.EquTypeID = EquipmentType4.EquTypeID INNER JOIN Assignment AS Assignment_4 ON Request_4.RequestID = Assignment_4.AssignmentID INNER JOIN TestReport AS TestReport_4 ON Assignment_4.AssignmentID = TestReport_4.AssignmentID INNER JOIN GroupEquipment AS GroupEquipment_4 ON EquipmentType4.GroupID = GroupEquipment_4.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType4.GroupID) AND (TestReport_4.TestReportIssueDate &gt;= @BD) AND (TestReport_4.TestReportIssueDate &lt;= @ED) AND (Request_4.ContractNo IS NULL OR Request_4.ContractNo = ' ') GROUP BY GroupEquipment_4.GroupEquID) AS SumPrice, (SELECT COUNT(Request_5.RequestID) AS NumofRequestHasContract FROM Request AS Request_5 INNER JOIN EquipmentType AS EquipmentType5 ON Request_5.EquTypeID = EquipmentType5.EquTypeID AND Request_5.EquTypeID = EquipmentType5.EquTypeID INNER JOIN GroupEquipment AS GroupEquipment_5 ON EquipmentType5.GroupID = GroupEquipment_5.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType5.GroupID) AND (Request_5.ReceiveDate &gt;= @BD) AND (Request_5.ReceiveDate &lt;= @ED) AND (Request_5.ContractNo IS NOT NULL) AND (Request_5.ContractNo &lt;&gt; ' ') GROUP BY GroupEquipment_5.GroupEquID) AS NumofRequestHasContract, (SELECT COUNT(Request_6.RequestID) AS NumOfRequestNonIssueHasContract FROM Request AS Request_6 INNER JOIN EquipmentType AS EquipmentType6 ON Request_6.EquTypeID = EquipmentType6.EquTypeID AND Request_6.EquTypeID = EquipmentType6.EquTypeID INNER JOIN GroupEquipment AS GroupEquipment_6 ON EquipmentType6.GroupID = GroupEquipment_6.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType6.GroupID) AND (Request_6.StatusID = 6 OR Request_6.StatusID = 7) AND (Request_6.ReceiveDate &gt;= @BD) AND (Request_6.ReceiveDate &lt;= @ED) AND (Request_6.ContractNo IS NOT NULL) AND (Request_6.ContractNo &lt;&gt; ' ') GROUP BY GroupEquipment_6.GroupEquID) AS NumOfRequestNonIssueHasContract, (SELECT COUNT(TestReport_7.AssignmentID) AS NumOfTestReportHasContract FROM Request AS Request_7 INNER JOIN EquipmentType AS EquipmentType7 ON Request_7.EquTypeID = EquipmentType7.EquTypeID AND Request_7.EquTypeID = EquipmentType7.EquTypeID INNER JOIN Assignment AS Assignment_7 ON Request_7.RequestID = Assignment_7.AssignmentID INNER JOIN TestReport AS TestReport_7 ON Assignment_7.AssignmentID = TestReport_7.AssignmentID INNER JOIN GroupEquipment AS GroupEquipment_7 ON EquipmentType7.GroupID = GroupEquipment_7.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType7.GroupID) AND (TestReport_7.TestReportIssueDate &gt;= @BD) AND (TestReport_7.TestReportIssueDate &lt;= @ED) AND (Request_7.ContractNo IS NOT NULL) AND (Request_7.ContractNo &lt;&gt; ' ') GROUP BY GroupEquipment_7.GroupEquID) AS NumOfTestReportHasContract, (SELECT SUM(EquipmentType8.Price) AS SumPriceHasContract FROM Request AS Request_8 INNER JOIN EquipmentType AS EquipmentType8 ON Request_8.EquTypeID = EquipmentType8.EquTypeID AND Request_8.EquTypeID = EquipmentType8.EquTypeID INNER JOIN Assignment AS Assignment_8 ON Request_8.RequestID = Assignment_8.AssignmentID INNER JOIN TestReport AS TestReport_8 ON Assignment_8.AssignmentID = TestReport_8.AssignmentID INNER JOIN GroupEquipment AS GroupEquipment_8 ON EquipmentType8.GroupID = GroupEquipment_8.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType8.GroupID) AND (TestReport_8.TestReportIssueDate &gt;= @BD) AND (TestReport_8.TestReportIssueDate &lt;= @ED) AND (Request_8.ContractNo IS NOT NULL) AND (Request_8.ContractNo &lt;&gt; ' ') GROUP BY GroupEquipment_8.GroupEquID) AS SumPriceHasContract FROM GroupEquipment WHERE ((SELECT COUNT(Request1.RequestID) AS NumofRequest FROM Request AS Request1 INNER JOIN EquipmentType AS EquipmentType1 ON Request1.EquTypeID = EquipmentType1.EquTypeID AND Request1.EquTypeID = EquipmentType1.EquTypeID INNER JOIN GroupEquipment AS GroupEquipment1 ON EquipmentType1.GroupID = GroupEquipment1.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType1.GroupID) AND (Request1.ReceiveDate &gt;= @BD) AND (Request1.ReceiveDate &lt;= @ED) AND (Request1.ContractNo IS NULL OR Request1.ContractNo = ' ') GROUP BY GroupEquipment1.GroupEquID) IS NOT NULL) ORDER BY NumOfRequest DESC</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="BD" ColumnName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@BD" Precision="0" ProviderType="DateTime" Scale="0" Size="3" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="ED" ColumnName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@ED" Precision="0" ProviderType="DateTime" Scale="0" Size="3" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [GroupEquipment] SET [GroupEquName] = @GroupEquName WHERE (([GroupEquID] = @Original_GroupEquID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@GroupEquName" Precision="0" ProviderType="NText" Scale="0" Size="0" SourceColumn="GroupEquName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_GroupEquID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="GroupEquID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="GroupEquName" DataSetColumn="GroupEquName" />
+              <Mapping SourceColumn="GroupEquID" DataSetColumn="GroupEquID" />
+              <Mapping SourceColumn="NumOfRequest" DataSetColumn="NumOfRequest" />
+              <Mapping SourceColumn="NumOfRequestNonIssue" DataSetColumn="NumOfRequestNonIssue" />
+              <Mapping SourceColumn="NumOfTestReport" DataSetColumn="NumOfTestReport" />
+              <Mapping SourceColumn="SumPrice" DataSetColumn="SumPrice" />
+              <Mapping SourceColumn="NumofRequestHasContract" DataSetColumn="NumofRequestHasContract" />
+              <Mapping SourceColumn="NumOfRequestNonIssueHasContract" DataSetColumn="NumOfRequestNonIssueHasContract" />
+              <Mapping SourceColumn="NumOfTestReportHasContract" DataSetColumn="NumOfTestReportHasContract" />
+              <Mapping SourceColumn="SumPriceHasContract" DataSetColumn="SumPriceHasContract" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="GroupEquipment1TableAdapter" GeneratorDataComponentClassName="GroupEquipment1TableAdapter" Name="GroupEquipment1" UserDataComponentName="GroupEquipment1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="db_mang (Web.config)" DbObjectName="dbvilas197.dbo.GroupEquipment" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [GroupEquipment] WHERE (([GroupEquID] = @Original_GroupEquID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_GroupEquID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="GroupEquID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [GroupEquipment] ([GroupEquName]) VALUES (@GroupEquName)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@GroupEquName" Precision="0" ProviderType="NText" Scale="0" Size="0" SourceColumn="GroupEquName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT GroupEquName, GroupEquID, (SELECT COUNT(Request1.RequestID) AS NumofRequest FROM Request AS Request1 INNER JOIN EquipmentType AS EquipmentType1 ON Request1.EquTypeID = EquipmentType1.EquTypeID AND Request1.EquTypeID = EquipmentType1.EquTypeID INNER JOIN GroupEquipment AS GroupEquipment1 ON EquipmentType1.GroupID = GroupEquipment1.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType1.GroupID) AND (Request1.ReceiveDate &gt;= @BD) AND (Request1.ReceiveDate &lt;= @ED) AND (Request1.ContractNo IS NULL OR Request1.ContractNo = ' ') GROUP BY GroupEquipment1.GroupEquID) AS NumOfRequest, (SELECT COUNT(Request_2.RequestID) AS NumOfRequestNonIssue FROM Request AS Request_2 INNER JOIN EquipmentType AS EquipmentType2 ON Request_2.EquTypeID = EquipmentType2.EquTypeID AND Request_2.EquTypeID = EquipmentType2.EquTypeID INNER JOIN GroupEquipment AS GroupEquipment_2 ON EquipmentType2.GroupID = GroupEquipment_2.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType2.GroupID) AND (Request_2.StatusID = 6 OR Request_2.StatusID = 7) AND (Request_2.ReceiveDate &gt;= @BD) AND (Request_2.ReceiveDate &lt;= @ED) AND (Request_2.ContractNo IS NULL OR Request_2.ContractNo = ' ') GROUP BY GroupEquipment_2.GroupEquID) AS NumOfRequestNonIssue, (SELECT COUNT(TestReport.AssignmentID) AS NumOfTestReport FROM Request AS Request_3 INNER JOIN EquipmentType AS EquipmentType3 ON Request_3.EquTypeID = EquipmentType3.EquTypeID AND Request_3.EquTypeID = EquipmentType3.EquTypeID INNER JOIN Assignment ON Request_3.RequestID = Assignment.AssignmentID INNER JOIN TestReport ON Assignment.AssignmentID = TestReport.AssignmentID INNER JOIN GroupEquipment AS GroupEquipment_3 ON EquipmentType3.GroupID = GroupEquipment_3.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType3.GroupID) AND (TestReport.TestReportIssueDate &gt;= @BD) AND (TestReport.TestReportIssueDate &lt;= @ED) AND (Request_3.ContractNo IS NULL OR Request_3.ContractNo = ' ') GROUP BY GroupEquipment_3.GroupEquID) AS NumOfTestReport, (SELECT SUM(EquipmentType4.Price) AS SumPrice FROM Request AS Request_4 INNER JOIN EquipmentType AS EquipmentType4 ON Request_4.EquTypeID = EquipmentType4.EquTypeID AND Request_4.EquTypeID = EquipmentType4.EquTypeID INNER JOIN Assignment AS Assignment_4 ON Request_4.RequestID = Assignment_4.AssignmentID INNER JOIN TestReport AS TestReport_4 ON Assignment_4.AssignmentID = TestReport_4.AssignmentID INNER JOIN GroupEquipment AS GroupEquipment_4 ON EquipmentType4.GroupID = GroupEquipment_4.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType4.GroupID) AND (TestReport_4.TestReportIssueDate &gt;= @BD) AND (TestReport_4.TestReportIssueDate &lt;= @ED) AND (Request_4.ContractNo IS NULL OR Request_4.ContractNo = ' ') GROUP BY GroupEquipment_4.GroupEquID) AS SumPrice, (SELECT COUNT(Request_5.RequestID) AS NumofRequestHasContract FROM Request AS Request_5 INNER JOIN EquipmentType AS EquipmentType5 ON Request_5.EquTypeID = EquipmentType5.EquTypeID AND Request_5.EquTypeID = EquipmentType5.EquTypeID INNER JOIN GroupEquipment AS GroupEquipment_5 ON EquipmentType5.GroupID = GroupEquipment_5.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType5.GroupID) AND (Request_5.ReceiveDate &gt;= @BD) AND (Request_5.ReceiveDate &lt;= @ED) AND (Request_5.ContractNo IS NOT NULL) AND (Request_5.ContractNo &lt;&gt; ' ') GROUP BY GroupEquipment_5.GroupEquID) AS NumofRequestHasContract, (SELECT COUNT(Request_6.RequestID) AS NumOfRequestNonIssueHasContract FROM Request AS Request_6 INNER JOIN EquipmentType AS EquipmentType6 ON Request_6.EquTypeID = EquipmentType6.EquTypeID AND Request_6.EquTypeID = EquipmentType6.EquTypeID INNER JOIN GroupEquipment AS GroupEquipment_6 ON EquipmentType6.GroupID = GroupEquipment_6.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType6.GroupID) AND (Request_6.StatusID = 6 OR Request_6.StatusID = 7) AND (Request_6.ReceiveDate &gt;= @BD) AND (Request_6.ReceiveDate &lt;= @ED) AND (Request_6.ContractNo IS NOT NULL) AND (Request_6.ContractNo &lt;&gt; ' ') GROUP BY GroupEquipment_6.GroupEquID) AS NumOfRequestNonIssueHasContract, (SELECT COUNT(TestReport_7.AssignmentID) AS NumOfTestReportHasContract FROM Request AS Request_7 INNER JOIN EquipmentType AS EquipmentType7 ON Request_7.EquTypeID = EquipmentType7.EquTypeID AND Request_7.EquTypeID = EquipmentType7.EquTypeID INNER JOIN Assignment AS Assignment_7 ON Request_7.RequestID = Assignment_7.AssignmentID INNER JOIN TestReport AS TestReport_7 ON Assignment_7.AssignmentID = TestReport_7.AssignmentID INNER JOIN GroupEquipment AS GroupEquipment_7 ON EquipmentType7.GroupID = GroupEquipment_7.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType7.GroupID) AND (TestReport_7.TestReportIssueDate &gt;= @BD) AND (TestReport_7.TestReportIssueDate &lt;= @ED) AND (Request_7.ContractNo IS NOT NULL) AND (Request_7.ContractNo &lt;&gt; ' ') GROUP BY GroupEquipment_7.GroupEquID) AS NumOfTestReportHasContract, (SELECT SUM(EquipmentType8.Price) AS SumPriceHasContract FROM Request AS Request_8 INNER JOIN EquipmentType AS EquipmentType8 ON Request_8.EquTypeID = EquipmentType8.EquTypeID AND Request_8.EquTypeID = EquipmentType8.EquTypeID INNER JOIN Assignment AS Assignment_8 ON Request_8.RequestID = Assignment_8.AssignmentID INNER JOIN TestReport AS TestReport_8 ON Assignment_8.AssignmentID = TestReport_8.AssignmentID INNER JOIN GroupEquipment AS GroupEquipment_8 ON EquipmentType8.GroupID = GroupEquipment_8.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType8.GroupID) AND (TestReport_8.TestReportIssueDate &gt;= @BD) AND (TestReport_8.TestReportIssueDate &lt;= @ED) AND (Request_8.ContractNo IS NOT NULL) AND (Request_8.ContractNo &lt;&gt; ' ') GROUP BY GroupEquipment_8.GroupEquID) AS SumPriceHasContract FROM GroupEquipment WHERE ((SELECT SUM(EquipmentType4.Price) AS SumPrice FROM Request AS Request_4 INNER JOIN EquipmentType AS EquipmentType4 ON Request_4.EquTypeID = EquipmentType4.EquTypeID AND Request_4.EquTypeID = EquipmentType4.EquTypeID INNER JOIN Assignment AS Assignment_4 ON Request_4.RequestID = Assignment_4.AssignmentID INNER JOIN TestReport AS TestReport_4 ON Assignment_4.AssignmentID = TestReport_4.AssignmentID INNER JOIN GroupEquipment AS GroupEquipment_4 ON EquipmentType4.GroupID = GroupEquipment_4.GroupEquID WHERE (GroupEquipment.GroupEquID = EquipmentType4.GroupID) AND (TestReport_4.TestReportIssueDate &gt;= @BD) AND (TestReport_4.TestReportIssueDate &lt;= @ED) AND (Request_4.ContractNo IS NULL OR Request_4.ContractNo = ' ') GROUP BY GroupEquipment_4.GroupEquID) IS NOT NULL) ORDER BY SumPrice DESC</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="BD" ColumnName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@BD" Precision="0" ProviderType="DateTime" Scale="0" Size="3" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="ED" ColumnName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@ED" Precision="0" ProviderType="DateTime" Scale="0" Size="3" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [GroupEquipment] SET [GroupEquName] = @GroupEquName WHERE (([GroupEquID] = @Original_GroupEquID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@GroupEquName" Precision="0" ProviderType="NText" Scale="0" Size="0" SourceColumn="GroupEquName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_GroupEquID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="GroupEquID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="GroupEquName" DataSetColumn="GroupEquName" />
+              <Mapping SourceColumn="GroupEquID" DataSetColumn="GroupEquID" />
+              <Mapping SourceColumn="NumOfRequest" DataSetColumn="NumOfRequest" />
+              <Mapping SourceColumn="NumOfRequestNonIssue" DataSetColumn="NumOfRequestNonIssue" />
+              <Mapping SourceColumn="NumOfTestReport" DataSetColumn="NumOfTestReport" />
+              <Mapping SourceColumn="SumPrice" DataSetColumn="SumPrice" />
+              <Mapping SourceColumn="NumofRequestHasContract" DataSetColumn="NumofRequestHasContract" />
+              <Mapping SourceColumn="NumOfRequestNonIssueHasContract" DataSetColumn="NumOfRequestNonIssueHasContract" />
+              <Mapping SourceColumn="NumOfTestReportHasContract" DataSetColumn="NumOfTestReportHasContract" />
+              <Mapping SourceColumn="SumPriceHasContract" DataSetColumn="SumPriceHasContract" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="GroupEquipment2TableAdapter" GeneratorDataComponentClassName="GroupEquipment2TableAdapter" Name="GroupEquipment2" UserDataComponentName="GroupEquipment2TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="db_mang (Web.config)" DbObjectName="dbvilas197.dbo.GroupEquipment" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [GroupEquipment] WHERE (([GroupEquID] = @Original_GroupEquID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_GroupEquID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="GroupEquID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [GroupEquipment] ([GroupEquName]) VALUES (@GroupEquName)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@GroupEquName" Precision="0" ProviderType="NText" Scale="0" Size="0" SourceColumn="GroupEquName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        GroupEquName, GroupEquID,
+                             (SELECT        COUNT(Request1.RequestID) AS NumofRequest
+                               FROM            Request AS Request1 INNER JOIN
+                                                         EquipmentType AS EquipmentType1 ON Request1.EquTypeID = EquipmentType1.EquTypeID AND 
+                                                         Request1.EquTypeID = EquipmentType1.EquTypeID INNER JOIN
+                                                         GroupEquipment AS GroupEquipment1 ON EquipmentType1.GroupID = GroupEquipment1.GroupEquID
+                               WHERE        (GroupEquipment.GroupEquID = EquipmentType1.GroupID) AND (Request1.ReceiveDate &gt;= @BD) AND (Request1.ReceiveDate &lt;= @ED)
+                               GROUP BY GroupEquipment1.GroupEquID) AS NumOfRequest,
+                             (SELECT        COUNT(Request_2.RequestID) AS NumOfRequestNonIssue
+                               FROM            Request AS Request_2 INNER JOIN
+                                                         EquipmentType AS EquipmentType2 ON Request_2.EquTypeID = EquipmentType2.EquTypeID AND 
+                                                         Request_2.EquTypeID = EquipmentType2.EquTypeID INNER JOIN
+                                                         GroupEquipment AS GroupEquipment_2 ON EquipmentType2.GroupID = GroupEquipment_2.GroupEquID
+                               WHERE        (GroupEquipment.GroupEquID = EquipmentType2.GroupID) AND (Request_2.StatusID = 6 OR
+                                                         Request_2.StatusID = 7) AND (Request_2.ReceiveDate &gt;= @BD) AND (Request_2.ReceiveDate &lt;= @ED)
+                               GROUP BY GroupEquipment_2.GroupEquID) AS NumOfRequestNonIssue,
+                             (SELECT        COUNT(TestReport.AssignmentID) AS NumOfTestReport
+                               FROM            Request AS Request_3 INNER JOIN
+                                                         EquipmentType AS EquipmentType3 ON Request_3.EquTypeID = EquipmentType3.EquTypeID AND 
+                                                         Request_3.EquTypeID = EquipmentType3.EquTypeID INNER JOIN
+                                                         Assignment ON Request_3.RequestID = Assignment.AssignmentID INNER JOIN
+                                                         TestReport ON Assignment.AssignmentID = TestReport.AssignmentID INNER JOIN
+                                                         GroupEquipment AS GroupEquipment_3 ON EquipmentType3.GroupID = GroupEquipment_3.GroupEquID
+                               WHERE        (GroupEquipment.GroupEquID = EquipmentType3.GroupID) AND (TestReport.TestReportIssueDate &gt;= @BD) AND 
+                                                         (TestReport.TestReportIssueDate &lt;= @ED)
+                               GROUP BY GroupEquipment_3.GroupEquID) AS NumOfTestReport,
+                             (SELECT        SUM(EquipmentType4.Price) AS SumPrice
+                               FROM            Request AS Request_4 INNER JOIN
+                                                         EquipmentType AS EquipmentType4 ON Request_4.EquTypeID = EquipmentType4.EquTypeID AND 
+                                                         Request_4.EquTypeID = EquipmentType4.EquTypeID INNER JOIN
+                                                         Assignment AS Assignment_4 ON Request_4.RequestID = Assignment_4.AssignmentID INNER JOIN
+                                                         TestReport AS TestReport_4 ON Assignment_4.AssignmentID = TestReport_4.AssignmentID INNER JOIN
+                                                         GroupEquipment AS GroupEquipment_4 ON EquipmentType4.GroupID = GroupEquipment_4.GroupEquID
+                               WHERE        (GroupEquipment.GroupEquID = EquipmentType4.GroupID) AND (TestReport_4.TestReportIssueDate &gt;= @BD) AND 
+                                                         (TestReport_4.TestReportIssueDate &lt;= @ED)
+                               GROUP BY GroupEquipment_4.GroupEquID) AS SumPrice
+FROM            GroupEquipment</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="BD" ColumnName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@BD" Precision="0" ProviderType="DateTime" Scale="0" Size="3" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="ED" ColumnName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@ED" Precision="0" ProviderType="DateTime" Scale="0" Size="3" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [GroupEquipment] SET [GroupEquName] = @GroupEquName WHERE (([GroupEquID] = @Original_GroupEquID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@GroupEquName" Precision="0" ProviderType="NText" Scale="0" Size="0" SourceColumn="GroupEquName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_GroupEquID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="GroupEquID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="GroupEquName" DataSetColumn="GroupEquName" />
+              <Mapping SourceColumn="GroupEquID" DataSetColumn="GroupEquID" />
+              <Mapping SourceColumn="NumOfRequest" DataSetColumn="NumOfRequest" />
+              <Mapping SourceColumn="NumOfRequestNonIssue" DataSetColumn="NumOfRequestNonIssue" />
+              <Mapping SourceColumn="NumOfTestReport" DataSetColumn="NumOfTestReport" />
+              <Mapping SourceColumn="SumPrice" DataSetColumn="SumPrice" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="db_mang (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT (SELECT SUM(1) AS No FROM Request AS Request8 WHERE (Request.RequestID &gt;= RequestID)) AS No, Request.RequestID, Request.RequestNo, Request.ContractNo, Request.BillNo, Company.CompanyName, EquipmentType.EquTypeName, Request.Model, Request.AppointmentDate, Request.StatusID, DATEDIFF(DAY, GETDATE(), Request.AppointmentDate) AS RequestDateDiff, RequestStatus.StatusName FROM Request INNER JOIN EquipmentType ON Request.EquTypeID = EquipmentType.EquTypeID INNER JOIN Company ON Request.CompanyID = Company.CompanyID AND Request.CompanyID = Company.CompanyID INNER JOIN RequestStatus ON Request.StatusID = RequestStatus.StatusID WHERE (Request.StatusID = 1 OR Request.StatusID = 2 OR Request.StatusID = 3) AND (DATEDIFF(DAY, GETDATE(), Request.AppointmentDate) &lt; 0) AND (Request.AppointmentDate &gt;= @BD) AND (Request.AppointmentDate &lt;= @ED)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="BD" ColumnName="AppointmentDate" DataSourceName="dbvilas197.dbo.Request" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@BD" Precision="0" ProviderType="DateTime" Scale="0" Size="3" SourceColumn="AppointmentDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="ED" ColumnName="AppointmentDate" DataSourceName="dbvilas197.dbo.Request" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@ED" Precision="0" ProviderType="DateTime" Scale="0" Size="3" SourceColumn="AppointmentDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="RequestID" DataSetColumn="RequestID" />
+              <Mapping SourceColumn="RequestNo" DataSetColumn="RequestNo" />
+              <Mapping SourceColumn="ContractNo" DataSetColumn="ContractNo" />
+              <Mapping SourceColumn="BillNo" DataSetColumn="BillNo" />
+              <Mapping SourceColumn="CompanyName" DataSetColumn="CompanyName" />
+              <Mapping SourceColumn="EquTypeName" DataSetColumn="EquTypeName" />
+              <Mapping SourceColumn="Model" DataSetColumn="Model" />
+              <Mapping SourceColumn="AppointmentDate" DataSetColumn="AppointmentDate" />
+              <Mapping SourceColumn="StatusID" DataSetColumn="StatusID" />
+              <Mapping SourceColumn="RequestDateDiff" DataSetColumn="RequestDateDiff" />
+              <Mapping SourceColumn="StatusName" DataSetColumn="StatusName" />
+              <Mapping SourceColumn="No" DataSetColumn="No" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable2TableAdapter" GeneratorDataComponentClassName="DataTable2TableAdapter" Name="DataTable2" UserDataComponentName="DataTable2TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="db_mang (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Request.RequestID, Request.RequestNo, Request.ContractNo, Request.BillNo, TestReport.TestReportNo, Company.CompanyName, EquipmentType.EquTypeName, Request.Model, Request.AppointmentDate, TestReport.TestReportIssueDate, DATEDIFF(DAY, TestReport.TestReportIssueDate, Request.AppointmentDate) AS TestReportDateDiff FROM Request INNER JOIN Assignment ON Request.RequestID = Assignment.AssignmentID INNER JOIN TestReport ON Assignment.AssignmentID = TestReport.AssignmentID INNER JOIN EquipmentType ON Request.EquTypeID = EquipmentType.EquTypeID INNER JOIN Company ON Request.CompanyID = Company.CompanyID AND Request.CompanyID = Company.CompanyID WHERE (TestReport.TestReportIssueDate &gt;= @BD) AND (TestReport.TestReportIssueDate &lt;= @ED) AND (DATEDIFF(DAY, TestReport.TestReportIssueDate, Request.AppointmentDate) &lt; 0)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="BD" ColumnName="TestReportIssueDate" DataSourceName="dbvilas197.dbo.TestReport" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@BD" Precision="0" ProviderType="DateTime" Scale="0" Size="3" SourceColumn="TestReportIssueDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="ED" ColumnName="TestReportIssueDate" DataSourceName="dbvilas197.dbo.TestReport" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@ED" Precision="0" ProviderType="DateTime" Scale="0" Size="3" SourceColumn="TestReportIssueDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="RequestID" DataSetColumn="RequestID" />
+              <Mapping SourceColumn="RequestNo" DataSetColumn="RequestNo" />
+              <Mapping SourceColumn="ContractNo" DataSetColumn="ContractNo" />
+              <Mapping SourceColumn="BillNo" DataSetColumn="BillNo" />
+              <Mapping SourceColumn="TestReportNo" DataSetColumn="TestReportNo" />
+              <Mapping SourceColumn="CompanyName" DataSetColumn="CompanyName" />
+              <Mapping SourceColumn="EquTypeName" DataSetColumn="EquTypeName" />
+              <Mapping SourceColumn="Model" DataSetColumn="Model" />
+              <Mapping SourceColumn="AppointmentDate" DataSetColumn="AppointmentDate" />
+              <Mapping SourceColumn="TestReportIssueDate" DataSetColumn="TestReportIssueDate" />
+              <Mapping SourceColumn="TestReportDateDiff" DataSetColumn="TestReportDateDiff" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TestingReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="TestingReport" msprop:Generator_UserDSName="TestingReport">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="EquipmentType" msprop:Generator_TableClassName="EquipmentTypeDataTable" msprop:Generator_TableVarName="tableEquipmentType" msprop:Generator_TablePropName="EquipmentType" msprop:Generator_RowDeletingName="EquipmentTypeRowDeleting" msprop:Generator_UserTableName="EquipmentType" msprop:Generator_RowChangingName="EquipmentTypeRowChanging" msprop:Generator_RowEvHandlerName="EquipmentTypeRowChangeEventHandler" msprop:Generator_RowDeletedName="EquipmentTypeRowDeleted" msprop:Generator_RowEvArgName="EquipmentTypeRowChangeEvent" msprop:Generator_RowChangedName="EquipmentTypeRowChanged" msprop:Generator_RowClassName="EquipmentTypeRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EquTypeID" msprop:Generator_ColumnVarNameInTable="columnEquTypeID" msprop:Generator_ColumnPropNameInRow="EquTypeID" msprop:Generator_ColumnPropNameInTable="EquTypeIDColumn" msprop:Generator_UserColumnName="EquTypeID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EquTypeName" msprop:Generator_ColumnVarNameInTable="columnEquTypeName" msprop:Generator_ColumnPropNameInRow="EquTypeName" msprop:Generator_ColumnPropNameInTable="EquTypeNameColumn" msprop:Generator_UserColumnName="EquTypeName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1073741823" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NumOfRequest" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfRequest" msprop:Generator_ColumnPropNameInRow="NumOfRequest" msprop:Generator_ColumnPropNameInTable="NumOfRequestColumn" msprop:Generator_UserColumnName="NumOfRequest" type="xs:int" minOccurs="0" />
+              <xs:element name="NumOfRequestNonIssue" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfRequestNonIssue" msprop:Generator_ColumnPropNameInRow="NumOfRequestNonIssue" msprop:Generator_ColumnPropNameInTable="NumOfRequestNonIssueColumn" msprop:Generator_UserColumnName="NumOfRequestNonIssue" type="xs:int" minOccurs="0" />
+              <xs:element name="NumOfTestReport" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfTestReport" msprop:Generator_ColumnPropNameInRow="NumOfTestReport" msprop:Generator_ColumnPropNameInTable="NumOfTestReportColumn" msprop:Generator_UserColumnName="NumOfTestReport" type="xs:int" minOccurs="0" />
+              <xs:element name="SumPrice" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSumPrice" msprop:Generator_ColumnPropNameInRow="SumPrice" msprop:Generator_ColumnPropNameInTable="SumPriceColumn" msprop:Generator_UserColumnName="SumPrice" type="xs:double" minOccurs="0" />
+              <xs:element name="NumofRequestHasContract" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumofRequestHasContract" msprop:Generator_ColumnPropNameInRow="NumofRequestHasContract" msprop:Generator_ColumnPropNameInTable="NumofRequestHasContractColumn" msprop:Generator_UserColumnName="NumofRequestHasContract" type="xs:int" minOccurs="0" />
+              <xs:element name="NumOfRequestNonIssueHasContract" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfRequestNonIssueHasContract" msprop:Generator_ColumnPropNameInRow="NumOfRequestNonIssueHasContract" msprop:Generator_ColumnPropNameInTable="NumOfRequestNonIssueHasContractColumn" msprop:Generator_UserColumnName="NumOfRequestNonIssueHasContract" type="xs:int" minOccurs="0" />
+              <xs:element name="NumOfTestReportHasContract" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfTestReportHasContract" msprop:Generator_ColumnPropNameInRow="NumOfTestReportHasContract" msprop:Generator_ColumnPropNameInTable="NumOfTestReportHasContractColumn" msprop:Generator_UserColumnName="NumOfTestReportHasContract" type="xs:int" minOccurs="0" />
+              <xs:element name="SumPriceHasContract" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSumPriceHasContract" msprop:Generator_ColumnPropNameInRow="SumPriceHasContract" msprop:Generator_ColumnPropNameInTable="SumPriceHasContractColumn" msprop:Generator_UserColumnName="SumPriceHasContract" type="xs:double" minOccurs="0" />
+              <xs:element name="No" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNo" msprop:Generator_ColumnPropNameInRow="No" msprop:Generator_ColumnPropNameInTable="NoColumn" msprop:Generator_UserColumnName="No" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EquipmentType1" msprop:Generator_TableClassName="EquipmentType1DataTable" msprop:Generator_TableVarName="tableEquipmentType1" msprop:Generator_TablePropName="EquipmentType1" msprop:Generator_RowDeletingName="EquipmentType1RowDeleting" msprop:Generator_UserTableName="EquipmentType1" msprop:Generator_RowChangingName="EquipmentType1RowChanging" msprop:Generator_RowEvHandlerName="EquipmentType1RowChangeEventHandler" msprop:Generator_RowDeletedName="EquipmentType1RowDeleted" msprop:Generator_RowEvArgName="EquipmentType1RowChangeEvent" msprop:Generator_RowChangedName="EquipmentType1RowChanged" msprop:Generator_RowClassName="EquipmentType1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EquTypeID" msprop:Generator_ColumnVarNameInTable="columnEquTypeID" msprop:Generator_ColumnPropNameInRow="EquTypeID" msprop:Generator_ColumnPropNameInTable="EquTypeIDColumn" msprop:Generator_UserColumnName="EquTypeID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EquTypeName" msprop:Generator_ColumnVarNameInTable="columnEquTypeName" msprop:Generator_ColumnPropNameInRow="EquTypeName" msprop:Generator_ColumnPropNameInTable="EquTypeNameColumn" msprop:Generator_UserColumnName="EquTypeName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1073741823" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SumTestReportInTime" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSumTestReportInTime" msprop:Generator_ColumnPropNameInRow="SumTestReportInTime" msprop:Generator_ColumnPropNameInTable="SumTestReportInTimeColumn" msprop:Generator_UserColumnName="SumTestReportInTime" type="xs:int" minOccurs="0" />
+              <xs:element name="SumTestReportOverTime" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSumTestReportOverTime" msprop:Generator_ColumnPropNameInRow="SumTestReportOverTime" msprop:Generator_ColumnPropNameInTable="SumTestReportOverTimeColumn" msprop:Generator_UserColumnName="SumTestReportOverTime" type="xs:int" minOccurs="0" />
+              <xs:element name="SumRequestInProCessOverTime" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSumRequestInProCessOverTime" msprop:Generator_ColumnPropNameInRow="SumRequestInProCessOverTime" msprop:Generator_ColumnPropNameInTable="SumRequestInProCessOverTimeColumn" msprop:Generator_UserColumnName="SumRequestInProCessOverTime" type="xs:int" minOccurs="0" />
+              <xs:element name="SumRequestInProCess" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSumRequestInProCess" msprop:Generator_ColumnPropNameInRow="SumRequestInProCess" msprop:Generator_ColumnPropNameInTable="SumRequestInProCessColumn" msprop:Generator_UserColumnName="SumRequestInProCess" type="xs:int" minOccurs="0" />
+              <xs:element name="No" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNo" msprop:Generator_ColumnPropNameInRow="No" msprop:Generator_ColumnPropNameInTable="NoColumn" msprop:Generator_UserColumnName="No" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="GroupEquipment" msprop:Generator_TableClassName="GroupEquipmentDataTable" msprop:Generator_TableVarName="tableGroupEquipment" msprop:Generator_TablePropName="GroupEquipment" msprop:Generator_RowDeletingName="GroupEquipmentRowDeleting" msprop:Generator_UserTableName="GroupEquipment" msprop:Generator_RowChangingName="GroupEquipmentRowChanging" msprop:Generator_RowEvHandlerName="GroupEquipmentRowChangeEventHandler" msprop:Generator_RowDeletedName="GroupEquipmentRowDeleted" msprop:Generator_RowEvArgName="GroupEquipmentRowChangeEvent" msprop:Generator_RowChangedName="GroupEquipmentRowChanged" msprop:Generator_RowClassName="GroupEquipmentRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GroupEquName" msprop:Generator_ColumnVarNameInTable="columnGroupEquName" msprop:Generator_ColumnPropNameInRow="GroupEquName" msprop:Generator_ColumnPropNameInTable="GroupEquNameColumn" msprop:Generator_UserColumnName="GroupEquName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1073741823" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GroupEquID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnGroupEquID" msprop:Generator_ColumnPropNameInRow="GroupEquID" msprop:Generator_ColumnPropNameInTable="GroupEquIDColumn" msprop:Generator_UserColumnName="GroupEquID" type="xs:int" />
+              <xs:element name="NumOfRequest" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfRequest" msprop:Generator_ColumnPropNameInRow="NumOfRequest" msprop:Generator_ColumnPropNameInTable="NumOfRequestColumn" msprop:Generator_UserColumnName="NumOfRequest" type="xs:int" minOccurs="0" />
+              <xs:element name="NumOfRequestNonIssue" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfRequestNonIssue" msprop:Generator_ColumnPropNameInRow="NumOfRequestNonIssue" msprop:Generator_ColumnPropNameInTable="NumOfRequestNonIssueColumn" msprop:Generator_UserColumnName="NumOfRequestNonIssue" type="xs:int" minOccurs="0" />
+              <xs:element name="NumOfTestReport" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfTestReport" msprop:Generator_ColumnPropNameInRow="NumOfTestReport" msprop:Generator_ColumnPropNameInTable="NumOfTestReportColumn" msprop:Generator_UserColumnName="NumOfTestReport" type="xs:int" minOccurs="0" />
+              <xs:element name="SumPrice" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSumPrice" msprop:Generator_ColumnPropNameInRow="SumPrice" msprop:Generator_ColumnPropNameInTable="SumPriceColumn" msprop:Generator_UserColumnName="SumPrice" type="xs:double" minOccurs="0" />
+              <xs:element name="NumofRequestHasContract" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumofRequestHasContract" msprop:Generator_ColumnPropNameInRow="NumofRequestHasContract" msprop:Generator_ColumnPropNameInTable="NumofRequestHasContractColumn" msprop:Generator_UserColumnName="NumofRequestHasContract" type="xs:int" minOccurs="0" />
+              <xs:element name="NumOfRequestNonIssueHasContract" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfRequestNonIssueHasContract" msprop:Generator_ColumnPropNameInRow="NumOfRequestNonIssueHasContract" msprop:Generator_ColumnPropNameInTable="NumOfRequestNonIssueHasContractColumn" msprop:Generator_UserColumnName="NumOfRequestNonIssueHasContract" type="xs:int" minOccurs="0" />
+              <xs:element name="NumOfTestReportHasContract" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfTestReportHasContract" msprop:Generator_ColumnPropNameInRow="NumOfTestReportHasContract" msprop:Generator_ColumnPropNameInTable="NumOfTestReportHasContractColumn" msprop:Generator_UserColumnName="NumOfTestReportHasContract" type="xs:int" minOccurs="0" />
+              <xs:element name="SumPriceHasContract" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSumPriceHasContract" msprop:Generator_ColumnPropNameInRow="SumPriceHasContract" msprop:Generator_ColumnPropNameInTable="SumPriceHasContractColumn" msprop:Generator_UserColumnName="SumPriceHasContract" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="GroupEquipment1" msprop:Generator_TableClassName="GroupEquipment1DataTable" msprop:Generator_TableVarName="tableGroupEquipment1" msprop:Generator_TablePropName="GroupEquipment1" msprop:Generator_RowDeletingName="GroupEquipment1RowDeleting" msprop:Generator_UserTableName="GroupEquipment1" msprop:Generator_RowChangingName="GroupEquipment1RowChanging" msprop:Generator_RowEvHandlerName="GroupEquipment1RowChangeEventHandler" msprop:Generator_RowDeletedName="GroupEquipment1RowDeleted" msprop:Generator_RowEvArgName="GroupEquipment1RowChangeEvent" msprop:Generator_RowChangedName="GroupEquipment1RowChanged" msprop:Generator_RowClassName="GroupEquipment1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GroupEquName" msprop:Generator_ColumnVarNameInTable="columnGroupEquName" msprop:Generator_ColumnPropNameInRow="GroupEquName" msprop:Generator_ColumnPropNameInTable="GroupEquNameColumn" msprop:Generator_UserColumnName="GroupEquName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1073741823" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GroupEquID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnGroupEquID" msprop:Generator_ColumnPropNameInRow="GroupEquID" msprop:Generator_ColumnPropNameInTable="GroupEquIDColumn" msprop:Generator_UserColumnName="GroupEquID" type="xs:int" />
+              <xs:element name="NumOfRequest" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfRequest" msprop:Generator_ColumnPropNameInRow="NumOfRequest" msprop:Generator_ColumnPropNameInTable="NumOfRequestColumn" msprop:Generator_UserColumnName="NumOfRequest" type="xs:int" minOccurs="0" />
+              <xs:element name="NumOfRequestNonIssue" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfRequestNonIssue" msprop:Generator_ColumnPropNameInRow="NumOfRequestNonIssue" msprop:Generator_ColumnPropNameInTable="NumOfRequestNonIssueColumn" msprop:Generator_UserColumnName="NumOfRequestNonIssue" type="xs:int" minOccurs="0" />
+              <xs:element name="NumOfTestReport" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfTestReport" msprop:Generator_ColumnPropNameInRow="NumOfTestReport" msprop:Generator_ColumnPropNameInTable="NumOfTestReportColumn" msprop:Generator_UserColumnName="NumOfTestReport" type="xs:int" minOccurs="0" />
+              <xs:element name="SumPrice" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSumPrice" msprop:Generator_ColumnPropNameInRow="SumPrice" msprop:Generator_ColumnPropNameInTable="SumPriceColumn" msprop:Generator_UserColumnName="SumPrice" type="xs:double" minOccurs="0" />
+              <xs:element name="NumofRequestHasContract" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumofRequestHasContract" msprop:Generator_ColumnPropNameInRow="NumofRequestHasContract" msprop:Generator_ColumnPropNameInTable="NumofRequestHasContractColumn" msprop:Generator_UserColumnName="NumofRequestHasContract" type="xs:int" minOccurs="0" />
+              <xs:element name="NumOfRequestNonIssueHasContract" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfRequestNonIssueHasContract" msprop:Generator_ColumnPropNameInRow="NumOfRequestNonIssueHasContract" msprop:Generator_ColumnPropNameInTable="NumOfRequestNonIssueHasContractColumn" msprop:Generator_UserColumnName="NumOfRequestNonIssueHasContract" type="xs:int" minOccurs="0" />
+              <xs:element name="NumOfTestReportHasContract" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfTestReportHasContract" msprop:Generator_ColumnPropNameInRow="NumOfTestReportHasContract" msprop:Generator_ColumnPropNameInTable="NumOfTestReportHasContractColumn" msprop:Generator_UserColumnName="NumOfTestReportHasContract" type="xs:int" minOccurs="0" />
+              <xs:element name="SumPriceHasContract" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSumPriceHasContract" msprop:Generator_ColumnPropNameInRow="SumPriceHasContract" msprop:Generator_ColumnPropNameInTable="SumPriceHasContractColumn" msprop:Generator_UserColumnName="SumPriceHasContract" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="GroupEquipment2" msprop:Generator_TableClassName="GroupEquipment2DataTable" msprop:Generator_TableVarName="tableGroupEquipment2" msprop:Generator_TablePropName="GroupEquipment2" msprop:Generator_RowDeletingName="GroupEquipment2RowDeleting" msprop:Generator_UserTableName="GroupEquipment2" msprop:Generator_RowChangingName="GroupEquipment2RowChanging" msprop:Generator_RowEvHandlerName="GroupEquipment2RowChangeEventHandler" msprop:Generator_RowDeletedName="GroupEquipment2RowDeleted" msprop:Generator_RowEvArgName="GroupEquipment2RowChangeEvent" msprop:Generator_RowChangedName="GroupEquipment2RowChanged" msprop:Generator_RowClassName="GroupEquipment2Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GroupEquName" msprop:Generator_ColumnVarNameInTable="columnGroupEquName" msprop:Generator_ColumnPropNameInRow="GroupEquName" msprop:Generator_ColumnPropNameInTable="GroupEquNameColumn" msprop:Generator_UserColumnName="GroupEquName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1073741823" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GroupEquID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnGroupEquID" msprop:Generator_ColumnPropNameInRow="GroupEquID" msprop:Generator_ColumnPropNameInTable="GroupEquIDColumn" msprop:Generator_UserColumnName="GroupEquID" type="xs:int" />
+              <xs:element name="NumOfRequest" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfRequest" msprop:Generator_ColumnPropNameInRow="NumOfRequest" msprop:Generator_ColumnPropNameInTable="NumOfRequestColumn" msprop:Generator_UserColumnName="NumOfRequest" type="xs:int" minOccurs="0" />
+              <xs:element name="NumOfRequestNonIssue" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfRequestNonIssue" msprop:Generator_ColumnPropNameInRow="NumOfRequestNonIssue" msprop:Generator_ColumnPropNameInTable="NumOfRequestNonIssueColumn" msprop:Generator_UserColumnName="NumOfRequestNonIssue" type="xs:int" minOccurs="0" />
+              <xs:element name="NumOfTestReport" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumOfTestReport" msprop:Generator_ColumnPropNameInRow="NumOfTestReport" msprop:Generator_ColumnPropNameInTable="NumOfTestReportColumn" msprop:Generator_UserColumnName="NumOfTestReport" type="xs:int" minOccurs="0" />
+              <xs:element name="SumPrice" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSumPrice" msprop:Generator_ColumnPropNameInRow="SumPrice" msprop:Generator_ColumnPropNameInTable="SumPriceColumn" msprop:Generator_UserColumnName="SumPrice" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowClassName="DataTable1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RequestID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnRequestID" msprop:Generator_ColumnPropNameInRow="RequestID" msprop:Generator_ColumnPropNameInTable="RequestIDColumn" msprop:Generator_UserColumnName="RequestID" type="xs:int" />
+              <xs:element name="RequestNo" msprop:Generator_ColumnVarNameInTable="columnRequestNo" msprop:Generator_ColumnPropNameInRow="RequestNo" msprop:Generator_ColumnPropNameInTable="RequestNoColumn" msprop:Generator_UserColumnName="RequestNo">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ContractNo" msprop:Generator_ColumnVarNameInTable="columnContractNo" msprop:Generator_ColumnPropNameInRow="ContractNo" msprop:Generator_ColumnPropNameInTable="ContractNoColumn" msprop:Generator_UserColumnName="ContractNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BillNo" msprop:Generator_ColumnVarNameInTable="columnBillNo" msprop:Generator_ColumnPropNameInRow="BillNo" msprop:Generator_ColumnPropNameInTable="BillNoColumn" msprop:Generator_UserColumnName="BillNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CompanyName" msprop:Generator_ColumnVarNameInTable="columnCompanyName" msprop:Generator_ColumnPropNameInRow="CompanyName" msprop:Generator_ColumnPropNameInTable="CompanyNameColumn" msprop:Generator_UserColumnName="CompanyName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1073741823" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EquTypeName" msprop:Generator_ColumnVarNameInTable="columnEquTypeName" msprop:Generator_ColumnPropNameInRow="EquTypeName" msprop:Generator_ColumnPropNameInTable="EquTypeNameColumn" msprop:Generator_UserColumnName="EquTypeName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1073741823" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Model" msprop:Generator_ColumnVarNameInTable="columnModel" msprop:Generator_ColumnPropNameInRow="Model" msprop:Generator_ColumnPropNameInTable="ModelColumn" msprop:Generator_UserColumnName="Model" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AppointmentDate" msprop:Generator_ColumnVarNameInTable="columnAppointmentDate" msprop:Generator_ColumnPropNameInRow="AppointmentDate" msprop:Generator_ColumnPropNameInTable="AppointmentDateColumn" msprop:Generator_UserColumnName="AppointmentDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="StatusID" msprop:Generator_ColumnVarNameInTable="columnStatusID" msprop:Generator_ColumnPropNameInRow="StatusID" msprop:Generator_ColumnPropNameInTable="StatusIDColumn" msprop:Generator_UserColumnName="StatusID" type="xs:int" minOccurs="0" />
+              <xs:element name="RequestDateDiff" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnRequestDateDiff" msprop:Generator_ColumnPropNameInRow="RequestDateDiff" msprop:Generator_ColumnPropNameInTable="RequestDateDiffColumn" msprop:Generator_UserColumnName="RequestDateDiff" type="xs:int" minOccurs="0" />
+              <xs:element name="StatusName" msprop:Generator_ColumnVarNameInTable="columnStatusName" msprop:Generator_ColumnPropNameInRow="StatusName" msprop:Generator_ColumnPropNameInTable="StatusNameColumn" msprop:Generator_UserColumnName="StatusName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="No" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNo" msprop:Generator_ColumnPropNameInRow="No" msprop:Generator_ColumnPropNameInTable="NoColumn" msprop:Generator_UserColumnName="No" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DataTable2" msprop:Generator_TableClassName="DataTable2DataTable" msprop:Generator_TableVarName="tableDataTable2" msprop:Generator_TablePropName="DataTable2" msprop:Generator_RowDeletingName="DataTable2RowDeleting" msprop:Generator_UserTableName="DataTable2" msprop:Generator_RowChangingName="DataTable2RowChanging" msprop:Generator_RowEvHandlerName="DataTable2RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable2RowDeleted" msprop:Generator_RowEvArgName="DataTable2RowChangeEvent" msprop:Generator_RowChangedName="DataTable2RowChanged" msprop:Generator_RowClassName="DataTable2Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RequestID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnRequestID" msprop:Generator_ColumnPropNameInRow="RequestID" msprop:Generator_ColumnPropNameInTable="RequestIDColumn" msprop:Generator_UserColumnName="RequestID" type="xs:int" />
+              <xs:element name="RequestNo" msprop:Generator_ColumnVarNameInTable="columnRequestNo" msprop:Generator_ColumnPropNameInRow="RequestNo" msprop:Generator_ColumnPropNameInTable="RequestNoColumn" msprop:Generator_UserColumnName="RequestNo">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ContractNo" msprop:Generator_ColumnVarNameInTable="columnContractNo" msprop:Generator_ColumnPropNameInRow="ContractNo" msprop:Generator_ColumnPropNameInTable="ContractNoColumn" msprop:Generator_UserColumnName="ContractNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BillNo" msprop:Generator_ColumnVarNameInTable="columnBillNo" msprop:Generator_ColumnPropNameInRow="BillNo" msprop:Generator_ColumnPropNameInTable="BillNoColumn" msprop:Generator_UserColumnName="BillNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TestReportNo" msprop:Generator_ColumnVarNameInTable="columnTestReportNo" msprop:Generator_ColumnPropNameInRow="TestReportNo" msprop:Generator_ColumnPropNameInTable="TestReportNoColumn" msprop:Generator_UserColumnName="TestReportNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CompanyName" msprop:Generator_ColumnVarNameInTable="columnCompanyName" msprop:Generator_ColumnPropNameInRow="CompanyName" msprop:Generator_ColumnPropNameInTable="CompanyNameColumn" msprop:Generator_UserColumnName="CompanyName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1073741823" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EquTypeName" msprop:Generator_ColumnVarNameInTable="columnEquTypeName" msprop:Generator_ColumnPropNameInRow="EquTypeName" msprop:Generator_ColumnPropNameInTable="EquTypeNameColumn" msprop:Generator_UserColumnName="EquTypeName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1073741823" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Model" msprop:Generator_ColumnVarNameInTable="columnModel" msprop:Generator_ColumnPropNameInRow="Model" msprop:Generator_ColumnPropNameInTable="ModelColumn" msprop:Generator_UserColumnName="Model" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AppointmentDate" msprop:Generator_ColumnVarNameInTable="columnAppointmentDate" msprop:Generator_ColumnPropNameInRow="AppointmentDate" msprop:Generator_ColumnPropNameInTable="AppointmentDateColumn" msprop:Generator_UserColumnName="AppointmentDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TestReportIssueDate" msprop:Generator_ColumnVarNameInTable="columnTestReportIssueDate" msprop:Generator_ColumnPropNameInRow="TestReportIssueDate" msprop:Generator_ColumnPropNameInTable="TestReportIssueDateColumn" msprop:Generator_UserColumnName="TestReportIssueDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TestReportDateDiff" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTestReportDateDiff" msprop:Generator_ColumnPropNameInRow="TestReportDateDiff" msprop:Generator_ColumnPropNameInTable="TestReportDateDiffColumn" msprop:Generator_UserColumnName="TestReportDateDiff" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:EquipmentType" />
+      <xs:field xpath="mstns:EquTypeID" />
+    </xs:unique>
+    <xs:unique name="EquipmentType1_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:EquipmentType1" />
+      <xs:field xpath="mstns:EquTypeID" />
+    </xs:unique>
+    <xs:unique name="GroupEquipment_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:GroupEquipment" />
+      <xs:field xpath="mstns:GroupEquID" />
+    </xs:unique>
+    <xs:unique name="GroupEquipment1_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:GroupEquipment1" />
+      <xs:field xpath="mstns:GroupEquID" />
+    </xs:unique>
+    <xs:unique name="GroupEquipment2_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:GroupEquipment2" />
+      <xs:field xpath="mstns:GroupEquID" />
+    </xs:unique>
+    <xs:unique name="DataTable1_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DataTable1" />
+      <xs:field xpath="mstns:RequestID" />
+    </xs:unique>
+    <xs:unique name="DataTable2_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DataTable2" />
+      <xs:field xpath="mstns:RequestID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

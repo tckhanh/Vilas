@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dataset_Danhmucgoc" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=VCC2-KHANH;Initial Catalog=dbvilas197;User ID=sa;Password=abc1234567" IsAppSettingsProperty="false" Modifier="Assembly" Name="Connection" ParameterPrefix="@" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="dbvilas197ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="dbvilas197ConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.dbvilas197ConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DanhmucgocValidAdapter" GeneratorDataComponentClassName="DanhmucgocValidAdapter" Name="DanhmucgocValid" UserDataComponentName="DanhmucgocValidAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="dbvilas197ConnectionString (Web.config)" DbObjectName="dbvilas197.dbo.DanhmucgocValid" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT DocTypeName, DocCode, Title, IssueNo, IssueDate, DecisionNo, DecisionDate, NotesOfUpdating, FileName FROM dbo.DanhmucgocValid</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="DocTypeName" DataSetColumn="DocTypeName" />
+              <Mapping SourceColumn="DocCode" DataSetColumn="DocCode" />
+              <Mapping SourceColumn="Title" DataSetColumn="Title" />
+              <Mapping SourceColumn="IssueNo" DataSetColumn="IssueNo" />
+              <Mapping SourceColumn="IssueDate" DataSetColumn="IssueDate" />
+              <Mapping SourceColumn="DecisionNo" DataSetColumn="DecisionNo" />
+              <Mapping SourceColumn="DecisionDate" DataSetColumn="DecisionDate" />
+              <Mapping SourceColumn="NotesOfUpdating" DataSetColumn="NotesOfUpdating" />
+              <Mapping SourceColumn="FileName" DataSetColumn="FileName" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dataset_Danhmucgoc" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="dataset_Danhmucgoc" msprop:Generator_UserDSName="dataset_Danhmucgoc">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DanhmucgocValid" msprop:Generator_TableClassName="DanhmucgocValidDataTable" msprop:Generator_TableVarName="tableDanhmucgocValid" msprop:Generator_TablePropName="DanhmucgocValid" msprop:Generator_RowDeletingName="DanhmucgocValidRowDeleting" msprop:Generator_UserTableName="DanhmucgocValid" msprop:Generator_RowChangingName="DanhmucgocValidRowChanging" msprop:Generator_RowEvHandlerName="DanhmucgocValidRowChangeEventHandler" msprop:Generator_RowDeletedName="DanhmucgocValidRowDeleted" msprop:Generator_RowEvArgName="DanhmucgocValidRowChangeEvent" msprop:Generator_RowChangedName="DanhmucgocValidRowChanged" msprop:Generator_RowClassName="DanhmucgocValidRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DocTypeName" msprop:Generator_ColumnVarNameInTable="columnDocTypeName" msprop:Generator_ColumnPropNameInRow="DocTypeName" msprop:Generator_ColumnPropNameInTable="DocTypeNameColumn" msprop:Generator_UserColumnName="DocTypeName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocCode" msprop:Generator_ColumnVarNameInTable="columnDocCode" msprop:Generator_ColumnPropNameInRow="DocCode" msprop:Generator_ColumnPropNameInTable="DocCodeColumn" msprop:Generator_UserColumnName="DocCode">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Title" msprop:Generator_ColumnVarNameInTable="columnTitle" msprop:Generator_ColumnPropNameInRow="Title" msprop:Generator_ColumnPropNameInTable="TitleColumn" msprop:Generator_UserColumnName="Title" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IssueNo" msprop:Generator_ColumnVarNameInTable="columnIssueNo" msprop:Generator_ColumnPropNameInRow="IssueNo" msprop:Generator_ColumnPropNameInTable="IssueNoColumn" msprop:Generator_UserColumnName="IssueNo" type="xs:int" />
+              <xs:element name="IssueDate" msprop:Generator_ColumnVarNameInTable="columnIssueDate" msprop:Generator_ColumnPropNameInRow="IssueDate" msprop:Generator_ColumnPropNameInTable="IssueDateColumn" msprop:Generator_UserColumnName="IssueDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DecisionNo" msprop:Generator_ColumnVarNameInTable="columnDecisionNo" msprop:Generator_ColumnPropNameInRow="DecisionNo" msprop:Generator_ColumnPropNameInTable="DecisionNoColumn" msprop:Generator_UserColumnName="DecisionNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DecisionDate" msprop:Generator_ColumnVarNameInTable="columnDecisionDate" msprop:Generator_ColumnPropNameInRow="DecisionDate" msprop:Generator_ColumnPropNameInTable="DecisionDateColumn" msprop:Generator_UserColumnName="DecisionDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="NotesOfUpdating" msprop:Generator_ColumnVarNameInTable="columnNotesOfUpdating" msprop:Generator_ColumnPropNameInRow="NotesOfUpdating" msprop:Generator_ColumnPropNameInTable="NotesOfUpdatingColumn" msprop:Generator_UserColumnName="NotesOfUpdating" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FileName" msprop:Generator_ColumnVarNameInTable="columnFileName" msprop:Generator_ColumnPropNameInRow="FileName" msprop:Generator_ColumnPropNameInTable="FileNameColumn" msprop:Generator_UserColumnName="FileName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

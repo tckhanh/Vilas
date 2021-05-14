@@ -1,0 +1,200 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="BaoCao.Master.cs" Inherits="LabManagement.BaoCao" %>
+
+<%@ Register assembly="DevExpress.Web.v20.1, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web" tagprefix="dx" %>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .style1
+        {
+            height: 31px;
+            text-align: center;
+        }
+        .style4
+        {
+            height: 59px;
+        }
+        .style5
+        {
+            height: 343px;
+        }
+        .style8
+        {
+            font-size: xx-large;
+            color: #FFFF00;
+        }
+        .style7
+        {
+            height: 59px;
+            font-size: xx-large;
+            color: #FFFF00;
+        }
+        .style9
+        {
+            width: 17%;
+            height: 343px;
+        }
+        .style10
+        {
+            color: #CC3300;
+            font-size: medium;
+        }
+        .style11
+        {
+            height: 59px;
+            text-align: center;
+            font-size: medium;
+        }
+        .style12
+        {
+            height: 393px;
+        }
+        .style13
+        {
+            color: #FFFF00;
+        }
+        .style15
+        {
+            color: #FFFFFF;
+        }
+        .style16
+        {
+            color: #CCFFCC;
+        }
+        .style17
+        {
+            text-decoration: none;
+        }
+        .style18
+        {
+            text-align: right;
+            height: 1px;
+        }
+        .style19
+        {
+            width: 100%;
+        }
+        .style20
+        {
+            width: 539px;
+        }
+        .style21
+        {
+            font-size: small;
+        }
+        .style22
+        {
+            font-size: medium;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <table width="100%" class="style12">
+        <tr>
+            <td align="left" bgcolor="#003366" class="style1" colspan="3" width="100%">
+                <asp:Image ID="Image1" runat="server" ImageAlign="Left" 
+                    ImageUrl="~/Images/vilas197logo.png" />
+                    <span class="style4"><strong>
+                <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="style8">HỆ THỐNG QUẢN TRỊ PHÒNG ĐO</span><br 
+                        class="style7" />
+                    <span class="style7">LAB MANAGEMENT</span></strong></span></td>
+        </tr>
+        <tr>
+            <td class="style18" colspan="3" width="100%" align="center" 
+                style="vertical-align: top; text-align: right;">
+                <strong><em>
+                <table class="style19">
+                    <tr>
+                        <td class="style20">
+                            <strong><em>
+                <dx:ASPxMenu ID="ASPxMenu1" runat="server" 
+                    BorderBetweenItemAndSubMenu="HideRootOnly" 
+                    CssFilePath="~/App_Themes/Office2003Blue/{0}/styles.css" 
+                    CssPostfix="Office2003Blue" ShowPopOutImages="True" 
+                    SpriteCssFilePath="~/App_Themes/Office2003Blue/{0}/sprite.css">
+                    <Items>
+                         <dx:MenuItem Text="Trang Chủ" NavigateUrl="~/TrangChinh.aspx">
+                        </dx:MenuItem>
+                        <dx:MenuItem Text="Quản lý đo kiểm" NavigateUrl="../1-TraCuuThongTin.aspx">
+                        </dx:MenuItem>
+                        <dx:MenuItem Text="Quản lý thiết bị" NavigateUrl="../2-TraCuuTTThietBi.aspx">
+                        </dx:MenuItem>
+                        <dx:MenuItem Text="Quản lý Hệ thống chất lượng" NavigateUrl="~/4-DatVPP.aspx">
+                        </dx:MenuItem>
+                        <dx:MenuItem Text="Cấu hình hệ thống" NavigateUrl="../0-DoiMatKhau.aspx">
+                        </dx:MenuItem>
+                    </Items>
+                    <LoadingPanelImage Url="~/App_Themes/Office2003Blue/Web/Loading.gif">
+                    </LoadingPanelImage>
+                    <ItemSubMenuOffset FirstItemX="2" LastItemX="2" X="2" />
+                    <ItemStyle HorizontalAlign="Left" />
+                    <SubMenuStyle GutterWidth="17px" />
+                </dx:ASPxMenu>
+                </em></strong>
+                        </td>
+                        <td class="style22">
+                            <strong><em style="color: #000000">Chào<span class="style21"> </span>
+                <asp:Label ID="lbloginname" runat="server" CssClass="style10" Text="Label"></asp:Label>
+                <asp:LinkButton ID="btexit0" runat="server" onclick="btexit_Click">Thoát</asp:LinkButton>
+                </em></strong>
+                        </td>
+                    </tr>
+                </table>
+                </em></strong>
+            </td>
+        </tr>
+        <tr>
+            <td class="style9" rowspan="1" style="vertical-align: top; text-align: left">
+                <dx:ASPxNavBar ID="ASPxNavBar1" runat="server" 
+                    CssFilePath="~/App_Themes/PlasticBlue/{0}/styles.css" CssPostfix="PlasticBlue" 
+                    SpriteCssFilePath="~/App_Themes/PlasticBlue/{0}/sprite.css" Width="204px">
+                    <Groups>
+                        <dx:NavBarGroup Text="Báo cáo hoạt động đo">
+                            <Items>
+                                <dx:NavBarItem Text="Báo cáo đột xuất" NavigateUrl="../1-NhanMau.aspx"></dx:NavBarItem>
+                                <dx:NavBarItem Text="Báo cáo quý" NavigateUrl="../1-PhanCongDo.aspx" ></dx:NavBarItem>
+                                <dx:NavBarItem Text="Báo cáo năm" NavigateUrl="../1-XacNhan.aspx"></dx:NavBarItem>                        
+                            </Items>
+                        </dx:NavBarGroup>
+                    </Groups>
+                    <ItemImage>
+                        <SpriteProperties CssClass="dxWeb_nbItemBullet_PlasticBlue" />
+                    </ItemImage>
+                    <LoadingPanelImage Url="~/App_Themes/PlasticBlue/Web/nbLoading.gif">
+                    </LoadingPanelImage>
+                </dx:ASPxNavBar>
+            </td>
+            <td class="style5" rowspan="1" style="vertical-align: top; text-align: left">
+                &nbsp;</td>
+            <td class="style5" width="100%" align="left">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </td>
+        </tr>
+        <tr>
+            <td class="style11" colspan="3" width="100%" bgcolor="#003366">
+                <br />
+                <span class="style13"><em>Lab Management 1.0 Copyright 2011 by VCC2 </em></span><em>
+                <br class="style13" />
+                </em><span class="style13"><em>Design by Nguyen Tran Anh Tuan</em></span><em><br 
+                    class="style13" />
+                </em><span class="style13"><em>Email:</em></span><span class="style15"> </span>
+                <em><span class="style15">&nbsp;
+                <a href="mailto:ntatuan@mic.gov.vn" class="style17"><span class="style16">ntatuan@mic.gov.vn</span></a></span><br 
+                    class="style15" />
+                <br />
+                </em>
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>
